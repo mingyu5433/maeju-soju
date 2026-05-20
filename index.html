@@ -301,5 +301,13 @@ footer{
 © 2026 매주술권장협회
 </footer>
 
+<script>
+history.scrollRestoration = "manual";
+
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
+</script>
+
 </body>
 </html>
