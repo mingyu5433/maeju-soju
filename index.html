@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>매주술권장협회</title>
 
 <style>
@@ -92,6 +94,16 @@ button:hover{
     border-radius:12px;
 }
 
+.record-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.delete-btn{
+    background:#8b1e1e;
+}
+
 ul{
     padding-left:20px;
     line-height:1.8;
@@ -127,7 +139,7 @@ footer{
 
 <p>
 ‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로,
-정기 모임과 C-Level Inner Circle Meetup 등을 통해
+정기 모임과 C-Level Inner Circle Meet Up 등을 통해
 회원 간 네트워크 활동을 이어가고 있는 단체이다.
 </p>
 
@@ -213,40 +225,121 @@ footer{
 
 <script>
 
+let records = JSON.parse(localStorage.getItem('records')) || [];
+
+function saveRecords(){
+    localStorage.setItem('records', JSON.stringify(records));
+}
+
+function renderRecords(){
+
+    const container = document.getElementById('records');
+    container.innerHTML = '';
+
+    records.forEach((record, index)=>{
+
+        const div = document.createElement('div');
+        div.className = 'record';
+
+        div.innerHTML = `
+            <h3>${record.title}</h3>
+            <p>${record.memo}</p>
+            ${record.image ? `<img src="${record.image}">` : ''}
+
+            <div class="record-buttons">
+                <button onclick="editRecord(${index})">수정</button>
+                <button class="delete-btn" onclick="deleteRecord(${index})">삭제</button>
+            </div>
+        `;
+
+        container.prepend(div);
+
+    });
+
+}
+
 function addRecord(){
 
     const title = document.getElementById('title').value;
     const memo = document.getElementById('memo').value;
     const photoInput = document.getElementById('photo');
 
-    const div = document.createElement('div');
-    div.className = 'record';
-
-    let imageHTML = '';
-
     if(photoInput.files.length > 0){
 
-        const file = photoInput.files[0];
-        const imageUrl = URL.createObjectURL(file);
+        const reader = new FileReader();
 
-        imageHTML = `
-        <img src="${imageUrl}">
-        `;
+        reader.onload = function(e){
+
+            const record = {
+                title:title,
+                memo:memo,
+                image:e.target.result
+            };
+
+            records.push(record);
+
+            saveRecords();
+            renderRecords();
+
+        };
+
+        reader.readAsDataURL(photoInput.files[0]);
+
+    }else{
+
+        const record = {
+            title:title,
+            memo:memo,
+            image:''
+        };
+
+        records.push(record);
+
+        saveRecords();
+        renderRecords();
+
     }
 
-    div.innerHTML = `
-        <h3>${title}</h3>
-        <p>${memo}</p>
-        ${imageHTML}
-    `;
-
-    document.getElementById('records').prepend(div);
-
-    document.getElementById('title').value = '';
-    document.getElementById('memo').value = '';
-    document.getElementById('photo').value = '';
+    document.getElementById('title').value='';
+    document.getElementById('memo').value='';
+    document.getElementById('photo').value='';
 
 }
+
+function editRecord(index){
+
+    const newTitle = prompt('제목 수정', records[index].title);
+    const newMemo = prompt('내용 수정', records[index].memo);
+
+    if(newTitle !== null){
+        records[index].title = newTitle;
+    }
+
+    if(newMemo !== null){
+        records[index].memo = newMemo;
+    }
+
+    saveRecords();
+    renderRecords();
+
+}
+
+function deleteRecord(index){
+
+    const confirmDelete = confirm('삭제하시겠습니까?');
+
+    if(confirmDelete){
+
+        records.splice(index,1);
+
+        saveRecords();
+        renderRecords();
+
+    }
+
+}
+
+renderRecords();
 
 </script>
 
