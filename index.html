@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>매주술권장협회</title>
 
 <style>
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
@@ -20,13 +21,47 @@ header{
     background:#0b4a32;
     color:white;
     text-align:center;
-    padding:40px 20px;
+    padding:40px 20px 30px;
 }
 
 .logo{
-    width:180px;
+    width:170px;
     border-radius:50%;
     background:white;
+}
+
+header h1{
+    margin:20px 0 10px;
+}
+
+header p{
+    max-width:900px;
+    margin:0 auto;
+    line-height:1.7;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    background:#0b4a32;
+    padding:15px 20px 25px;
+    flex-wrap:wrap;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    border:2px solid white;
+    padding:10px 20px;
+    border-radius:999px;
+}
+
+.menu a:hover{
+    background:white;
+    color:#0b4a32;
 }
 
 .container{
@@ -43,6 +78,10 @@ header{
     box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
+.card h2{
+    margin-top:0;
+}
+
 .members{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -55,42 +94,24 @@ header{
     padding:15px;
 }
 
-input,
-textarea{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    margin-top:10px;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#0b4a32;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button:hover{
-    opacity:0.9;
-}
-
 .record{
     background:#fafafa;
     border-radius:15px;
-    padding:15px;
+    padding:20px;
     margin-top:15px;
+}
+
+.record h3{
+    margin-top:0;
+}
+
+.record p{
+    line-height:1.8;
 }
 
 .record img{
     width:100%;
-    margin-top:10px;
+    margin-top:15px;
     border-radius:12px;
 }
 
@@ -108,130 +129,154 @@ footer{
 }
 
 @media (max-width:780px){
+    .logo{
+        width:130px;
+    }
 
-.members{
-    grid-template-columns:1fr;
+    header{
+        padding:30px 18px 22px;
+    }
+
+    header p{
+        font-size:14px;
+    }
+
+    .menu{
+        gap:8px;
+        padding:12px 12px 20px;
+    }
+
+    .menu a{
+        font-size:14px;
+        padding:9px 13px;
+    }
+
+    .container{
+        padding:14px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .members{
+        grid-template-columns:1fr;
+    }
 }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header>
+    <img class="logo" src="./KakaoTalk_20260520_101819009.png">
 
-<img class="logo" src="./KakaoTalk_20260520_101819009.png">
+    <h1>매주술권장협회</h1>
 
-<h1>매주술권장협회</h1>
-
-<p>
-‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로,
-정기 모임과 C-Level Inner Circle Meet Up 등을 통해
-회원 간 네트워크 활동을 이어가고 있는 단체이다.
-</p>
-
+    <p>
+        ‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로,
+        정기 모임과 C-Level Inner Circle Meet Up 등을 통해
+        회원 간 네트워크 활동을 이어가고 있는 단체이다.
+    </p>
 </header>
+
+<nav class="menu">
+    <a href="#rules">협회칙</a>
+    <a href="#talent">인재상</a>
+    <a href="#members">회원 소개</a>
+    <a href="#news">주요 뉴스</a>
+</nav>
 
 <div class="container">
 
-<div class="card">
+    <div class="card" id="rules">
+        <h2>협회칙</h2>
 
-<h2>협회칙</h2>
+        <ul>
+            <li>안주만 집중 공략하는 자, 즉결 처형</li>
+            <li>술자리 중 음료를 단독 주문하는 자, 사상 검증 진행 후 즉결 처형</li>
+            <li>“나 먼저 들어갈게”를 선언하는 자, 밀정으로 간주 후 즉결 처형</li>
+            <li>멀쩡하면서 취한 척 연기하는 자, 즉결 처형</li>
+            <li>술자리 결제대행자에게 12시간 이내 송금하지 않는 자, 이자 10% 추징</li>
+            <li>텐션을 저해하는 표정·행동·발언이 적발된 자, 즉결 처형</li>
+        </ul>
+    </div>
 
-<ul>
-<li>안주만 집중 공략하는 자, 즉결 처형</li>
-<li>술자리 중 음료를 단독 주문하는 자, 사상 검증 진행 후 즉결 처형</li>
-<li>“나 먼저 들어갈게”를 선언하는 자, 밀정으로 간주 후 즉결 처형</li>
-<li>멀쩡하면서 취한 척 연기하는 자, 즉결 처형</li>
-<li>술자리 결제대행자에게 12시간 이내 송금하지 않는 자, 이자 10% 추징</li>
-<li>텐션을 저해하는 표정·행동·발언이 적발된 자, 즉결 처형</li>
-</ul>
+    <div class="card" id="talent">
+        <h2>인재상</h2>
 
-</div>
+        <ul>
+            <li>적당한 주량과 분위기의 가치를 이해할 줄 아는 자</li>
+            <li>“한잔 하자”를 먼저 제안할 수 있는 애주가 마인드를 장착한 자</li>
+            <li>술자리 리액션 및 호응 능력이 우수한 자</li>
+            <li>술김에도 선을 넘지 않는 성숙함을 갖춘 자</li>
+            <li>늦은 귀가에도 큰 문제가 없는 생활 패턴을 보유한 자</li>
+        </ul>
+    </div>
 
-<div class="card">
+    <div class="card" id="members">
+        <h2>회원 소개</h2>
 
-<h2>인재상</h2>
+        <div class="members">
+            <div class="member">
+                <h3>한창희</h3>
+                <p>협회장 · 소주 3병</p>
+            </div>
 
-<ul>
-<li>적당한 주량과 분위기의 가치를 이해할 줄 아는 자</li>
-<li>“한잔 하자”를 먼저 제안할 수 있는 애주가 마인드를 장착한 자</li>
-<li>술자리 리액션 및 호응 능력이 우수한 자</li>
-<li>술김에도 선을 넘지 않는 성숙함을 갖춘 자</li>
-<li>늦은 귀가에도 큰 문제가 없는 생활 패턴을 보유한 자</li>
-</ul>
+            <div class="member">
+                <h3>김성민</h3>
+                <p>필라델피아지부 부장 · 소주 4병 이상</p>
+            </div>
 
-</div>
+            <div class="member">
+                <h3>최민규</h3>
+                <p>상근부회장 · 소주 2병</p>
+            </div>
+        </div>
+    </div>
 
-<div class="card">
+    <div class="card" id="news">
+        <h2>주요 뉴스</h2>
 
-<h2>회원 소개</h2>
+        <div class="record">
+            <h3>‘매주 술 권장 협회’, 22일 용인서 비공개 ‘이너서클 밋업’ 개최</h3>
 
-<div class="members">
+            <img src="./기사사진.jpg">
 
-<div class="member">
-<h3>한창희</h3>
-<p>협회장 · 소주 3병</p>
-</div>
+            <p>
+                ‘매주 술 권장 협회’가 오는 22일 경기 용인시 수지구 풍덕천동에서
+                비공개 형태의 ‘이너서클 밋업’을 개최한다.
+            </p>
 
-<div class="member">
-<h3>김성민</h3>
-<p>필라델피아지부 부장 · 소주 4병 이상</p>
-</div>
+            <p>
+                이번 밋업은 협회 핵심 운영진 중심의 소규모 네트워킹 행사로,
+                음주와 인간관계, 음주 기반 커뮤니티 운영 방향 등을 주제로
+                자유로운 교류가 이뤄질 예정이다.
+            </p>
 
-<div class="member">
-<h3>최민규</h3>
-<p>상근부회장 · 소주 2병</p>
-</div>
+            <p>
+                행사에는 한창희 협회장을 비롯해 김성민 필라델피아지부 부장,
+                최민규 상근부회장이 참석한다.
+            </p>
 
-</div>
+            <p>
+                참석자들은 최근 변화하는 음주 문화와 친목 커뮤니티 운영 방향을 비롯해,
+                협회 내부 운영 과정에서 제기된 일부 비협조적 인물들에 대한 대응 방향과
+                조직 안정화 방안 등에 대해서도 의견을 교환할 예정이다.
+            </p>
 
-</div>
+            <p>
+                이번 행사는 금요일 오후 10시부터 진행되며,
+                참석자 간 자유로운 네트워킹과 교류 중심으로 운영될 예정이다.
+            </p>
 
-<div class="card">
+            <p>
+                ‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로,
+                정기 모임과 번개 밋업 등을 통해 회원 간 네트워크 활동을 이어가고 있다.
+            </p>
+        </div>
 
-<h2>주요 뉴스</h2>
-
-<div id="records">
-
-<div class="record">
-
-<h3>‘매주 술 권장 협회’, 22일 용인서 비공개 ‘이너서클 밋업’ 개최</h3>
-
-<img src="./기사사진.png">
-
-<p>
-‘매주 술 권장 협회’가 오는 22일 경기 용인시 수지구 풍덕천동에서 비공개 형태의 ‘이너서클 밋업’을 개최한다.
-</p>
-
-<p>
-이번 밋업은 협회 핵심 운영진 중심의 소규모 네트워킹 행사로, 음주와 인간관계, 음주 기반 커뮤니티 운영 방향 등을 주제로 자유로운 교류가 이뤄질 예정이다.
-</p>
-
-<p>
-행사에는 한창희 협회장을 비롯해 김성민 필라델피아지부 부장, 최민규 상금부회장이 참석한다.
-</p>
-
-<p>
-참석자들은 최근 변화하는 음주 문화와 친목 커뮤니티 운영 방향을 비롯해, 협회 내부 운영 과정에서 제기된 일부 비협조적 인물들에 대한 대응 방향과 조직 안정화 방안 등에 대해서도 의견을 교환할 예정이다.
-</p>
-
-<p>
-이번 행사는 금요일 오후 10시부터 진행되며, 참석자 간 자유로운 네트워킹과 교류 중심으로 운영될 예정이다.
-</p>
-
-<p>
-‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로, 정기 모임과 번개 밋업 등을 통해 회원 간 네트워크 활동을 이어가고 있다.
-</p>
-
-</div>
-
-</div>
-    
-</div>
+    </div>
 
 </div>
 
