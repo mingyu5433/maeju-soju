@@ -212,8 +212,7 @@ footer{
 
   <section class="card hero" id="about">
     <div>
-      <h2>"건전하고 지속적인 음주 교류를 지향합니다."</h2>
-      <p>
+<h2 class="secret-title" onclick="recommendPlace()">"건전하고 지속적인 음주 교류를 지향합니다."</h2>      <p>
         ‘매주 술 권장 협회’는 친목과 교류 중심의 민간 커뮤니티로,
         정기 모임과 C-Level Inner Circle Meetup 등을 통해
         회원 간 네트워크 활동을 이어가고 있는 단체입니다.
@@ -398,7 +397,21 @@ mingyu5433@gmail.com
     <p>정확한 위치는 정회원 및 초청 대상자에게만 별도 안내됩니다.</p>
   </div>
 </div>
+<div id="placeModal" class="modal">
+  <div class="modal-content place-modal">
+    <span class="close" onclick="closeModal('placeModal')">&times;</span>
 
+    <h3>🍶 오늘의 협회 추천 미팅 장소</h3>
+
+    <p id="placeResult" class="place-result"></p>
+
+    <p>
+      내부 운영진 심의 결과,
+      금일 미팅 장소로 적합하다고 판단되었습니다.
+      별로라고 생각이 들면 직접 의견을 내십시오.
+    </p>
+  </div>
+</div>
 <style>
 .site-footer {
   background: #202020;
@@ -512,6 +525,26 @@ mingyu5433@gmail.com
     margin: 35% auto;
   }
 }
+.secret-title {
+  cursor: pointer;
+}
+
+.place-result {
+  font-size: 26px;
+  font-weight: bold;
+  color: #07462f;
+  margin: 18px 0;
+}
+
+.flash-effect {
+  animation: flashScreen 0.45s ease;
+}
+
+@keyframes flashScreen {
+  0% { filter: brightness(1); }
+  30% { filter: brightness(1.8); }
+  100% { filter: brightness(1); }
+}
 </style>
 
 <script>
@@ -527,6 +560,32 @@ window.onclick = function(event) {
   if (event.target.classList.contains('modal')) {
     event.target.style.display = 'none';
   }
+}
+  function recommendPlace() {
+  const places = [
+    "모소리",
+    "시선",
+    "수작",
+    "금별맥주",
+    "우후죽순",
+    "부엉이산장",
+    "우이락",
+    "깡우동",
+    "양푼이",
+    "역전할머니맥주",
+    "준코"
+  ];
+
+  const randomPlace = places[Math.floor(Math.random() * places.length)];
+
+  document.getElementById("placeResult").innerText = randomPlace;
+  document.body.classList.add("flash-effect");
+
+  setTimeout(function() {
+    document.body.classList.remove("flash-effect");
+  }, 450);
+
+  openModal("placeModal");
 }
 </script>
 
