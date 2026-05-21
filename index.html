@@ -313,11 +313,15 @@ footer{
 </footer>
 
 <script>
-history.scrollRestoration = "manual";
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 
-window.onbeforeunload = function () {
+window.addEventListener('load', function () {
+  setTimeout(function () {
     window.scrollTo(0, 0);
-};
+  }, 0);
+});
 </script>
 
 </body>
