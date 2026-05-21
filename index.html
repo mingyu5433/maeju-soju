@@ -537,15 +537,23 @@ mingyu5433@gmail.com
 }
 
 .flash-overlay {
+.flash-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(7, 70, 47, 0.35);
-  z-index: 9998;
+  inset: 0;
+  background: rgba(255, 0, 0, 0.45);
+  z-index: 99999;
   pointer-events: none;
-  animation: flashOverlay 0.5s ease-out;
+  animation: alarmFlash 0.9s ease-in-out;
+}
+
+@keyframes alarmFlash {
+  0% { opacity: 0; }
+  15% { opacity: 1; background: rgba(255, 0, 0, 0.55); }
+  30% { opacity: 0; }
+  45% { opacity: 1; background: rgba(7, 70, 47, 0.55); }
+  60% { opacity: 0; }
+  75% { opacity: 1; background: rgba(255, 210, 0, 0.5); }
+  100% { opacity: 0; }
 }
 
 @keyframes flashOverlay {
@@ -593,8 +601,7 @@ window.onclick = function(event) {
 
   setTimeout(function() {
     flash.remove();
-  }, 500);
-
+}, 900);
  openModal("placeModal");
 }
 </script>
