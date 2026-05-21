@@ -552,8 +552,7 @@ mingyu5433@gmail.com
   0% { opacity: 0; }
   25% { opacity: 1; }
   100% { opacity: 0; }
-}yle>
-
+</style>
 <script>
 function openModal(id) {
   document.getElementById(id).style.display = 'block';
@@ -596,11 +595,12 @@ window.onclick = function(event) {
     flash.remove();
   }, 500);
 
-  openModal("placeModal");
+ openModal("placeModal");
 }
+</script>
+
 <script>
 if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
 }
 
 window.addEventListener('load', function () {
