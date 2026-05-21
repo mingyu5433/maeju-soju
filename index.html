@@ -341,9 +341,171 @@ footer{
 
 </div>
 
-<footer>
-© 2026 매주술권장협회
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-links">
+      <button onclick="openModal('privacyModal')">개인정보처리방침</button>
+      <button onclick="openModal('mapModal')">찾아오시는 길</button>
+    </div>
+
+    <div class="footer-social">
+<a href="https://www.instagram.com/maesoju_acting?igsh=dm9lcHkybzVlYTlh&utm_source=qr" target="_blank" title="Instagram 바로가기">📷</a>    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>대한민국 경기도 용인시 어딘가</p>
+    <p>대표전화 : 비밀 l 문의처 : <a href="mailto:mingyu5433@gmail.com">mingyu5433@gmail.com</a></p>
+    <p>입회 신청 문의 : <a href="mailto:2765804@naver.com">2765804@naver.com</a></p>
+    <p>ⓒ2024 Weekly Drinking Promotion Association. All rights reserved.</p>
+  </div>
 </footer>
+
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+    <h3>개인정보처리방침</h3>
+    <p>매주술권장협회는 회원 문의 및 입회 신청 확인을 위해 최소한의 개인정보만 수집합니다.</p>
+    <p>수집된 정보는 협회 운영 목적 외에는 사용되지 않으며, 요청 시 즉시 삭제됩니다.</p>
+  </div>
+</div>
+
+<div id="mapModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('mapModal')">&times;</span>
+    <h3>찾아오시는 길</h3>
+    <p>본 협회는 대한민국 경기도 용인시 어딘가에 위치한 비공개 친목 기반 기관입니다.</p>
+    <p>정확한 위치는 정회원 및 초청 대상자에게만 별도 안내됩니다.</p>
+  </div>
+</div>
+
+<style>
+.site-footer {
+  background: #202020;
+  color: #ddd;
+  margin-top: 60px;
+  font-size: 14px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 8%;
+  border-bottom: 1px solid #444;
+}
+
+.footer-links button {
+  background: none;
+  border: none;
+  color: #ddd;
+  margin-right: 28px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.footer-links button:hover {
+  color: #7ccf8a;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #555;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.footer-social a:hover {
+  background: #2f8f46;
+}
+
+.footer-bottom {
+  padding: 28px 8%;
+  line-height: 1.8;
+}
+
+.footer-bottom p {
+  margin: 4px 0;
+}
+
+.footer-bottom a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: #7ccf8a;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  color: #222;
+  width: 90%;
+  max-width: 420px;
+  margin: 18% auto;
+  padding: 24px;
+  border-radius: 10px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .footer-links button {
+    display: block;
+    margin: 0 0 12px 0;
+  }
+
+  .modal-content {
+    margin: 35% auto;
+  }
+}
+</style>
+
+<script>
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = 'none';
+  }
+}
+</script>
 
 <script>
 if ('scrollRestoration' in history) {
