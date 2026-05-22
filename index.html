@@ -702,12 +702,13 @@ mingyu5433@gmail.com
 
 .roulette-arrow {
   position: absolute;
-  top: -18px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 28px;
+  font-size: 34px;
   color: #d32f2f;
-  z-index: 10;
+  z-index: 20;
+  line-height: 1;
 }
 
 .roulette-btn {
@@ -751,6 +752,8 @@ window.onclick = function(event) {
   function recommendPlace() {
     let currentRotation = 0;
 
+let currentRotation = 0;
+
 function startRoulette() {
 
   const input = document.getElementById("rouletteInput").value;
@@ -769,20 +772,17 @@ function startRoulette() {
 
   const wheel = document.getElementById("rouletteWheel");
 
-  const rotateDegree =
-    360 * 6 +
-    (360 / people.length) * winnerIndex;
+  currentRotation += 1440 + Math.random() * 720;
 
-  currentRotation += rotateDegree;
+  wheel.style.transform =
+    `rotate(${currentRotation}deg)`;
 
-  wheel.style.transform = `rotate(${currentRotation}deg)`;
-
-  setTimeout(() => {
+  setTimeout(function () {
 
     document.getElementById("rouletteResult").innerText =
       `🍦 오늘의 아이스크림 : ${people[winnerIndex]}`;
 
-  }, 4200);
+  }, 4000);
 }
   const places = [
     "모소리",
