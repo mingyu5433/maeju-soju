@@ -210,10 +210,6 @@ footer{
 
 <div class="utility-buttons">
 
-  <button onclick="openModal('rouletteModal')">
-    🍦 아이스크림 룰렛
-  </button>
-
   <button onclick="openModal('secretModal')">
     🔒 협회 문서함
   </button>
@@ -465,32 +461,7 @@ mingyu5433@gmail.com
 
   </div>
 </div>
-  <div id="rouletteModal" class="modal">
-  <div class="modal-content">
-
-    <span class="close" onclick="closeModal('rouletteModal')">&times;</span>
-
-    <h3>🍦 오늘의 아이스크림 룰렛</h3>
-
-    <p>참가자 이름을 쉼표(,)로 구분해서 입력하세요.</p>
-
-    <input
-      type="text"
-      id="rouletteInput"
-      placeholder="예: 유나,지민,원영"
-      style="width:100%; padding:12px; margin-top:10px;"
-    >
-
-    <div class="roulette-wrapper">
-
-      <div class="roulette-arrow">▼</div>
-
-      <div id="rouletteWheel" class="roulette-wheel">
-        START
-      </div>
-
-    </div>
-
+ 
 <button type="button" class="roulette-btn" onclick="startRoulette()">
   룰렛 돌리기
 </button>
@@ -677,63 +648,7 @@ mingyu5433@gmail.com
   display: block;
   box-sizing: border-box;
 }
-  .roulette-wrapper {
-  position: relative;
-  width: 240px;
-  height: 240px;
-  margin: 30px auto;
-}
 
-.roulette-wheel {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: #07462f;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 22px;
-  transition: transform 4s cubic-bezier(0.17, 0.67, 0.15, 1);
-  border: 8px solid #dfeee4;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-
-.roulette-arrow {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 34px;
-  color: #d32f2f;
-  z-index: 20;
-  line-height: 1;
-}
-
-.roulette-btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  background: #07462f;
-  color: white;
-  font-size: 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.roulette-btn:hover {
-  background: #0b5d3f;
-}
-
-.roulette-result {
-  margin-top: 24px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  color: #07462f;
-}
 </style>
 <script>
 function openModal(id) {
@@ -752,19 +667,7 @@ window.onclick = function(event) {
   function recommendPlace() {
     let currentRotation = 0;
 
-function startRoulette() {
 
-  const input = document.getElementById("rouletteInput").value;
-
-  const people = input
-    .split(",")
-    .map(v => v.trim())
-    .filter(v => v !== "");
-
-  if (people.length < 2) {
-    alert("최소 2명 이상 입력하세요.");
-    return;
-  }
 
   const result =
     people[Math.floor(Math.random() * people.length)];
