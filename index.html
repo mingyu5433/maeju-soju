@@ -491,9 +491,9 @@ mingyu5433@gmail.com
 
     </div>
 
-<button type="button" onclick="startRoulette()" class="roulette-btn">   
+<button type="button" class="roulette-btn" onclick="startRoulette()">
   룰렛 돌리기
-    </button>
+</button>
 
     <p id="rouletteResult" class="roulette-result"></p>
 
@@ -752,42 +752,39 @@ window.onclick = function(event) {
   function recommendPlace() {
     let currentRotation = 0;
 
-let currentRotation = 0;
-
 function startRoulette() {
 
-  const input =
-    document.getElementById("rouletteInput").value;
+  const input = document.getElementById("rouletteInput").value;
 
   const people = input
     .split(",")
-    .map(name => name.trim())
-    .filter(name => name !== "");
+    .map(v => v.trim())
+    .filter(v => v !== "");
 
   if (people.length < 2) {
     alert("최소 2명 이상 입력하세요.");
     return;
   }
 
-  const winnerIndex =
-    Math.floor(Math.random() * people.length);
+  const result =
+    people[Math.floor(Math.random() * people.length)];
 
   const wheel =
     document.getElementById("rouletteWheel");
 
-  currentRotation =
-    currentRotation + 1800 + Math.random() * 720;
-
   wheel.style.transition =
-    "transform 4s cubic-bezier(0.17, 0.67, 0.15, 1)";
+    "transform 4s ease-out";
+
+  const randomRotate =
+    1440 + Math.floor(Math.random() * 720);
 
   wheel.style.transform =
-    `rotate(${currentRotation}deg)`;
+    `rotate(${randomRotate}deg)`;
 
-  setTimeout(() => {
+  setTimeout(function() {
 
     document.getElementById("rouletteResult").innerText =
-      `🍦 오늘의 아이스크림 🍦\n${people[winnerIndex]}`;
+      `🍦 오늘의 아이스크림 🍦\n${result}`;
 
   }, 4000);
 }
