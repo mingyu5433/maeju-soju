@@ -491,8 +491,8 @@ mingyu5433@gmail.com
 
     </div>
 
-    <button onclick="startRoulette()" class="roulette-btn">
-      룰렛 돌리기
+<button type="button" onclick="startRoulette()" class="roulette-btn">   
+  룰렛 돌리기
     </button>
 
     <p id="rouletteResult" class="roulette-result"></p>
@@ -756,7 +756,8 @@ let currentRotation = 0;
 
 function startRoulette() {
 
-  const input = document.getElementById("rouletteInput").value;
+  const input =
+    document.getElementById("rouletteInput").value;
 
   const people = input
     .split(",")
@@ -768,19 +769,25 @@ function startRoulette() {
     return;
   }
 
-  const winnerIndex = Math.floor(Math.random() * people.length);
+  const winnerIndex =
+    Math.floor(Math.random() * people.length);
 
-  const wheel = document.getElementById("rouletteWheel");
+  const wheel =
+    document.getElementById("rouletteWheel");
 
-  currentRotation += 1440 + Math.random() * 720;
+  currentRotation =
+    currentRotation + 1800 + Math.random() * 720;
+
+  wheel.style.transition =
+    "transform 4s cubic-bezier(0.17, 0.67, 0.15, 1)";
 
   wheel.style.transform =
     `rotate(${currentRotation}deg)`;
 
-  setTimeout(function () {
+  setTimeout(() => {
 
     document.getElementById("rouletteResult").innerText =
-      `🍦 오늘의 아이스크림 : ${people[winnerIndex]}`;
+      `🍦 오늘의 아이스크림 🍦\n${people[winnerIndex]}`;
 
   }, 4000);
 }
