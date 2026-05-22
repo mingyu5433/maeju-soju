@@ -462,14 +462,7 @@ mingyu5433@gmail.com
   </div>
 </div>
  
-<button type="button" class="roulette-btn" onclick="startRoulette()">
-  룰렛 돌리기
-</button>
 
-    <p id="rouletteResult" class="roulette-result"></p>
-
-  </div>
-</div>
 <style>
 .site-footer {
   background: #202020;
@@ -664,33 +657,8 @@ window.onclick = function(event) {
     event.target.style.display = 'none';
   }
 }
-  function recommendPlace() {
-    let currentRotation = 0;
+ function recommendPlace() {
 
-
-
-  const result =
-    people[Math.floor(Math.random() * people.length)];
-
-  const wheel =
-    document.getElementById("rouletteWheel");
-
-  wheel.style.transition =
-    "transform 4s ease-out";
-
-  const randomRotate =
-    1440 + Math.floor(Math.random() * 720);
-
-  wheel.style.transform =
-    `rotate(${randomRotate}deg)`;
-
-  setTimeout(function() {
-
-    document.getElementById("rouletteResult").innerText =
-      `🍦 오늘의 아이스크림 🍦\n${result}`;
-
-  }, 4000);
-}
   const places = [
     "모소리",
     "시선",
@@ -705,19 +673,23 @@ window.onclick = function(event) {
     "준코"
   ];
 
-  const randomPlace = places[Math.floor(Math.random() * places.length)];
+  const randomPlace =
+    places[Math.floor(Math.random() * places.length)];
 
-  document.getElementById("placeResult").innerText = randomPlace;
+  document.getElementById("placeResult").innerText =
+    randomPlace;
 
   const flash = document.createElement("div");
+
   flash.className = "flash-overlay";
 
   document.body.appendChild(flash);
 
-  setTimeout(function() {
+  setTimeout(function () {
     flash.remove();
-}, 900);
- openModal("placeModal");
+  }, 900);
+
+  openModal("placeModal");
 }
 </script>
 
