@@ -326,30 +326,44 @@ footer{
 <section class="card" id="news">
   <h2>주요 뉴스</h2>
 
-  <div class="news-slider">
+  <div class="news-wrapper">
 
-    <div class="news-card" onclick="openModal('newsModal1')">
-      <img src="./근영사진.jpg">
-      <div class="news-card-body">
-        <p class="article-info">입력 : 2026년 5월 22일</p>
-        <h3>[뉴스특보] 허근영 전무이사, 외부 일정 마치고 ‘이너서클 밋업’ 합류 예정</h3>
+    <button class="news-arrow left" onclick="scrollNews(-1)">
+      ❮
+    </button>
+
+    <div class="news-slider" id="newsSlider">
+
+      <div class="news-card" onclick="openModal('newsModal3')">
+        <img src="./밋업사진.png">
+        <div class="news-card-body">
+          <p class="article-info">입력 : 2026년 5월 23일</p>
+          <h3>[현장스케치] 이너서클 밋업 성료…핵심 운영진 결속 강화</h3>
+        </div>
       </div>
+
+      <div class="news-card" onclick="openModal('newsModal1')">
+        <img src="./근영사진.jpg">
+        <div class="news-card-body">
+          <p class="article-info">입력 : 2026년 5월 22일</p>
+          <h3>[뉴스특보] 허근영 전무이사, 외부 일정 마치고 ‘이너서클 밋업’ 합류 예정</h3>
+        </div>
+      </div>
+
+      <div class="news-card" onclick="openModal('newsModal2')">
+        <img src="./기사사진 1.png">
+        <div class="news-card-body">
+          <p class="article-info">입력 : 2026년 5월 20일</p>
+          <h3>‘매주 술 권장 협회’, 22일 용인서 비공개 ‘이너서클 밋업’ 개최</h3>
+        </div>
+      </div>
+
     </div>
 
-    <div class="news-card" onclick="openModal('newsModal2')">
-      <img src="./기사사진 1.png">
-      <div class="news-card-body">
-        <p class="article-info">입력 : 2026년 5월 20일</p>
-        <h3>‘매주 술 권장 협회’, 22일 용인서 비공개 ‘이너서클 밋업’ 개최</h3>
-      </div>
-    </div>
-<div class="news-card" onclick="openModal('newsModal3')">
-  <img src="./밋업사진.png">
-  <div class="news-card-body">
-    <p class="article-info">입력 : 2026년 5월 23일</p>
-    <h3>[현장스케치] 이너서클 밋업 성료…핵심 운영진 결속 강화</h3>
-  </div>
-</div>
+    <button class="news-arrow right" onclick="scrollNews(1)">
+      ❯
+    </button>
+
   </div>
 </section>
 
@@ -851,6 +865,17 @@ window.onclick = function(event) {
   }, 900);
 
   openModal("placeModal");
+}
+  function scrollNews(direction) {
+
+  const slider =
+    document.getElementById("newsSlider");
+
+  slider.scrollBy({
+    left: direction * 320,
+    behavior: "smooth"
+  });
+
 }
 </script>
 
