@@ -808,7 +808,43 @@ mingyu5433@gmail.com
   line-height: 1.85;
   font-size: 16px;
 }
+.news-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.news-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 20;
+}
+
+.news-arrow:hover {
+  background: #07462f;
+  color: white;
+}
+
+.news-arrow.left {
+  left: -18px;
+}
+
+.news-arrow.right {
+  right: -18px;
+}
+
+.news-slider::-webkit-scrollbar {
+  display: none;
+}
 </style>
 <script>
 function openModal(id) {
