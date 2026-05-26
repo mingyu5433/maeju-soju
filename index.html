@@ -1010,7 +1010,28 @@ mingyu5433@gmail.com
 .history-details[open] summary::after{
   content:"▲";
 }
+#topButton{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:999px;
+  background:#07462f;
+  color:white;
+  font-size:22px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+  z-index:9999;
+  transition:0.2s ease;
+}
 
+#topButton:hover{
+  transform:translateY(-4px);
+  background:#0a5a3c;
+}
 .news-card {
   min-width:292px;
   max-width:330px;
@@ -1214,13 +1235,20 @@ if ('scrollRestoration' in history) {
 }
 
 window.addEventListener('load', function () {
-
+function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
   setTimeout(function () {
     window.scrollTo(0, 0);
   }, 0);
 
 });
 </script>
-
+<button id="topButton" onclick="scrollToTop()">
+  ↑
+</button>
 </body>
 </html>
