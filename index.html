@@ -292,70 +292,75 @@ footer{
     </ul>
   </section>
 <section class="card" id="history">
-  <h2>협회 연혁</h2>
 
-  <div class="history-group">
-    <h3>2017</h3>
-    <ul>
-      <li>매주술권장협회 비공식 창립</li>
-      <li>새벽 7시 해산 사례 최초 기록</li>
-      <li>풍덕천동 일대 비공식 회합 정례화</li>
-    </ul>
-  </div>
+  <details class="history-details">
 
-  <div class="history-group">
-    <h3>2020</h3>
-    <ul>
-      <li>코로나19 확산에 따른 비대면 짠 시스템 시범 운영</li>
-      <li>허근영 전무이사, 볼링 기반 친목 프로그램 연구 착수</li>
-    </ul>
-  </div>
+    <summary>협회 연혁 열람</summary>
 
-  <div class="history-group">
-    <h3>2021</h3>
-    <ul>
-      <li>송병완 상무이사, ‘걸어서 일본 한 바퀴’ 프로젝트 공식 시작</li>
-    </ul>
-  </div>
+    <div class="history-group">
+      <h3>2017</h3>
+      <ul>
+        <li>매주술권장협회 비공식 창립</li>
+        <li>새벽 7시 해산 사례 최초 기록</li>
+        <li>풍덕천동 일대 비공식 회합 정례화</li>
+      </ul>
+    </div>
 
-  <div class="history-group">
-    <h3>2022</h3>
-    <ul>
-      <li>가위바위보를 통한 아이스크림 몰빵 제도 시범 운영</li>
-    </ul>
-  </div>
+    <div class="history-group">
+      <h3>2020</h3>
+      <ul>
+        <li>코로나19 확산에 따른 비대면 짠 시스템 시범 운영</li>
+        <li>허근영 전무이사, 볼링 기반 친목 프로그램 연구 착수</li>
+      </ul>
+    </div>
 
-  <div class="history-group">
-    <h3>2023</h3>
-    <ul>
-      <li>정철현 감사 건배후미섭취감찰관 겸임 발령</li>
-    </ul>
-  </div>
+    <div class="history-group">
+      <h3>2021</h3>
+      <ul>
+        <li>송병완 상무이사, ‘걸어서 일본 한 바퀴’ 프로젝트 공식 시작</li>
+      </ul>
+    </div>
 
-  <div class="history-group">
-    <h3>2024</h3>
-    <ul>
-      <li>한창희 제1대 협회장 취임</li>
-      <li>
-        협회 운영 체계 전면 개편
-        <br>
-        (단순 실수에도 즉결 처형 가능한 내부 대응 프로토콜 세계 최초 도입)
-      </li>
-      <li>정철현 감사 주도 하에 건배 미섭취 집중 단속기간 시작</li>
-    </ul>
-  </div>
+    <div class="history-group">
+      <h3>2022</h3>
+      <ul>
+        <li>가위바위보를 통한 아이스크림 몰빵 제도 시범 운영</li>
+      </ul>
+    </div>
 
-  <div class="history-group">
-    <h3>2025</h3>
-    <ul>
-      <li>김성민 해외지부 운영총괄 임명 및 미국 장기체류 시작</li>
-      <li>필라델피아지부 설립 (약 3,000평 규모)</li>
-      <li>송병완 상무이사, 일본 현지 주점 동선 분석 보고서 내부 공유</li>
-      <li>정철현 감사, 회합 현장 안전관리 유공 협회장 표창 수상</li>
-      <li>텍사스지부 설립 (5,000평 규모)</li>
-      <li>이너서클 밋업 출범</li>
-    </ul>
-  </div>
+    <div class="history-group">
+      <h3>2023</h3>
+      <ul>
+        <li>정철현 감사 건배후미섭취감찰관 겸임 발령</li>
+      </ul>
+    </div>
+
+    <div class="history-group">
+      <h3>2024</h3>
+      <ul>
+        <li>한창희 제1대 협회장 취임</li>
+        <li>
+          협회 운영 체계 전면 개편
+          <br>
+          (단순 실수에도 즉결 처형 가능한 내부 대응 프로토콜 세계 최초 도입)
+        </li>
+        <li>정철현 감사 주도 하에 건배 미섭취 집중 단속기간 시작</li>
+      </ul>
+    </div>
+
+    <div class="history-group">
+      <h3>2025</h3>
+      <ul>
+        <li>김성민 해외지부 운영총괄 임명 및 미국 장기체류 시작</li>
+        <li>필라델피아지부 설립 (약 3,000평 규모)</li>
+        <li>송병완 상무이사, 일본 현지 주점 동선 분석 보고서 내부 공유</li>
+        <li>정철현 감사, 회합 현장 안전관리 유공 협회장 표창 수상</li>
+        <li>텍사스지부 설립 (5,000평 규모)</li>
+        <li>이너서클 밋업 출범</li>
+      </ul>
+    </div>
+
+  </details>
 
 </section>
   <section class="card" id="talent">
@@ -973,6 +978,36 @@ mingyu5433@gmail.com
 .history-group li{
   margin-bottom:10px;
   line-height:1.8;
+}
+
+  .history-details summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:22px;
+  font-weight:800;
+  color:#07462f;
+  padding:18px 22px;
+  background:#f4eee4;
+  border-radius:16px;
+  transition:0.2s ease;
+}
+
+.history-details summary:hover{
+  background:#ece2d4;
+}
+
+.history-details[open] summary{
+  margin-bottom:28px;
+}
+
+.history-details summary::after{
+  content:"＋";
+  float:right;
+  font-size:24px;
+}
+
+.history-details[open] summary::after{
+  content:"－";
 }
 .news-card {
   min-width:292px;
