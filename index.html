@@ -295,7 +295,7 @@ footer{
 
   <details class="history-details">
 
-    <summary>협회 연혁 열람</summary>
+    <summary>협회 연혁</summary>
 
     <div class="history-group">
       <h3>2017</h3>
@@ -980,35 +980,37 @@ mingyu5433@gmail.com
   line-height:1.8;
 }
 
-  .history-details summary{
+.history-details summary{
   cursor:pointer;
   list-style:none;
-  font-size:22px;
+  font-size:31px;
   font-weight:800;
-  color:#07462f;
-  padding:18px 22px;
-  background:#f4eee4;
-  border-radius:16px;
-  transition:0.2s ease;
+  color:#073b28;
+  padding-bottom:14px;
+  border-bottom:2px solid #07462f;
+  letter-spacing:-0.8px;
 }
 
-.history-details summary:hover{
-  background:#ece2d4;
+.history-details summary::-webkit-details-marker{
+  display:none;
+}
+
+.history-details summary::after{
+  content:"▼";
+  float:right;
+  font-size:20px;
+  margin-top:8px;
+  color:#07462f;
 }
 
 .history-details[open] summary{
   margin-bottom:28px;
 }
 
-.history-details summary::after{
-  content:"＋";
-  float:right;
-  font-size:24px;
+.history-details[open] summary::after{
+  content:"▲";
 }
 
-.history-details[open] summary::after{
-  content:"－";
-}
 .news-card {
   min-width:292px;
   max-width:330px;
