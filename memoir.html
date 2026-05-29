@@ -131,6 +131,31 @@ nav a{
   .card{padding:26px;}
 }
 </style>
+  .bgm-box{
+  margin:18px 0 34px;
+}
+
+.bgm-box button{
+  border:none;
+  background:#07462f;
+  color:white;
+  padding:11px 18px;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.bgm-box button:hover{
+  background:#0a5a3c;
+}
+
+.bgm-player{
+  display:none;
+  margin-top:14px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #e1d2bf;
+}
 </head>
 
 <body>
@@ -166,7 +191,21 @@ nav a{
   <section class="card" id="episode1">
     <h2>제1화. 이슬톡톡 소년</h2>
     <p class="article-info">기록 : 2026.05.29</p>
+<div class="bgm-box">
+  <button onclick="toggleBgm()">▶️음악 재생</button>
 
+  <div id="bgmPlayer" class="bgm-player">
+    <iframe
+      width="100%"
+      height="152"
+      src="https://www.youtube.com/embed/QwVjTlTdIDQ&list=RDQwVjTlTdIDQ&start_radio=1
+      title="회고록 BGM"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
     <div class="memoir-content">
 협회장 서문
 
@@ -507,6 +546,16 @@ nav a{
   <a class="back-button" href="./index.html">← 협회 홈페이지로 돌아가기</a>
 
 </div>
+<script>
+function toggleBgm(){
+  const player = document.getElementById("bgmPlayer");
 
+  if(player.style.display === "block"){
+    player.style.display = "none";
+  } else {
+    player.style.display = "block";
+  }
+}
+</script>
 </body>
 </html>
