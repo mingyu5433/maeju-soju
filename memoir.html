@@ -125,7 +125,32 @@ nav a{
   text-decoration:none;
   font-weight:800;
 }
+.chapter-title{
+  margin:60px 0 30px;
+  padding:14px 22px;
+  background:#edf7ef;
+  border-left:6px solid #07462f;
+  font-size:26px;
+  font-weight:800;
+  color:#07462f;
+}
 
+.episode-title{
+  margin:70px 0 40px;
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  color:#07462f;
+}
+
+.episode-title::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:3px;
+  background:#07462f;
+  margin:16px auto 0;
+}
 @media(max-width:700px){
   header h1{font-size:30px;}
   .card{padding:26px;}
