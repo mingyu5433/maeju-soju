@@ -108,13 +108,7 @@ nav a{
   background:#edf7ef;
 }
 
-.memoir-content{
-  line-height:2;
-  font-size:17px;
-  color:#26352d;
-  white-space:pre-line;
-  text-align:left;
-}
+
 .back-button{
   display:inline-block;
   margin-top:20px;
@@ -192,10 +186,22 @@ nav a{
   header h1{font-size:30px;}
   .card{padding:26px;}
 }
-  @media(max-width:700px){
+
+.memoir-content{
+  line-height:2;
+  font-size:17px;
+  color:#26352d;
+  white-space:pre-wrap !important;
+  text-align:left;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+
+@media(max-width:700px){
   .memoir-content{
     font-size:16px;
     line-height:1.9;
+    white-space:pre-wrap !important;
     word-break:keep-all;
     overflow-wrap:break-word;
   }
