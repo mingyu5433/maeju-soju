@@ -112,9 +112,14 @@ nav a{
   line-height:2;
   font-size:17px;
   color:#26352d;
-  white-space:pre-line;
+  white-space:normal;
+  word-break:keep-all;
+  overflow-wrap:break-word;
 }
 
+.memoir-content p{
+  margin:0 0 22px;
+}
 .back-button{
   display:inline-block;
   margin-top:20px;
@@ -191,6 +196,24 @@ nav a{
 @media(max-width:700px){
   header h1{font-size:30px;}
   .card{padding:26px;}
+}
+  @media(max-width:700px){
+  .memoir-content{
+    font-size:16px;
+    line-height:1.9;
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+
+  .episode-title{
+    font-size:28px;
+    line-height:1.35;
+  }
+
+  .main-title{
+    font-size:30px;
+    line-height:1.35;
+  }
 }
 </style>
 
