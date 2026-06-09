@@ -988,6 +988,12 @@ function toggleBgm(){
 }
 
 function toggleBgm2(){
+  function scrollToTop(){
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
   const player = document.getElementById("bgmPlayer2");
 
   if(player.style.display === "block"){
@@ -997,6 +1003,8 @@ function toggleBgm2(){
   }
 }
 </script>
-  
+  <button id="topButton" onclick="scrollToTop()">
+↑
+</button>
 </body>
 </html>
