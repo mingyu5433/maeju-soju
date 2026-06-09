@@ -216,6 +216,64 @@ nav a{
     line-height:1.35;
   }
 }
+.episode-details summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:32px;
+  font-weight:900;
+  color:#07462f;
+  border-bottom:2px solid #07462f;
+  padding-bottom:14px;
+}
+
+.episode-details summary::-webkit-details-marker{
+  display:none;
+}
+
+.episode-details summary::after{
+  content:"▼";
+  float:right;
+  font-size:22px;
+}
+
+.episode-details[open] summary::after{
+  content:"▲";
+}
+
+.episode-details > h2{
+  display:none;
+}
+
+#topButton{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  width:54px;
+  height:54px;
+  border:none;
+  border-radius:999px;
+  background:#07462f;
+  color:white;
+  font-size:22px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+  z-index:9999;
+}
+
+@media(max-width:700px){
+  #topButton{
+    width:48px;
+    height:48px;
+    right:18px;
+    bottom:22px;
+  }
+
+  .episode-details summary{
+    font-size:27px;
+    line-height:1.35;
+  }
+}
 </style>
 
 </head>
@@ -249,8 +307,9 @@ nav a{
       <button disabled>제5화. 준비 중</button>
     </div>
   </section>
-
   <section class="card" id="episode1">
+    <details class="episode-details">
+<summary>제1화. 맥주 500 소년</summary>
     <h2>제1화. 맥주 500 소년</h2>
     <p class="article-info">기록 : 2026.05.29</p>
 <div class="bgm-box">
@@ -633,9 +692,12 @@ src="https://www.youtube.com/embed/_QkGAaYtXA0"
 이야기의 첫 페이지를 넘기고 있었을 뿐이다.
 
     </div>
+  </details>
   </section>
 
 <section class="card" id="episode2">
+  <details class="episode-details">
+<summary>제2화. 카트를 밀며</summary>
 <h2>
 제2화. 카트를 밀며
 </h2>
@@ -908,7 +970,8 @@ src="https://www.youtube.com/embed/_QkGAaYtXA0"
 
 조금씩 협회장이 되어가던 시간이었다.
 
-  </div>
+   </div>
+</details>
 </section>
   <a class="back-button" href="./index.html">← 협회 홈페이지로 돌아가기</a>
 
@@ -934,5 +997,6 @@ function toggleBgm2(){
   }
 }
 </script>
+  
 </body>
 </html>
