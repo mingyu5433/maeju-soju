@@ -481,7 +481,8 @@ ul{
   border-radius:10px;
   overflow:hidden;
   border:2px solid var(--gold);
-  height:110px;
+  width:100%;
+  aspect-ratio:1.4;
   background:radial-gradient(circle at 50% 40%, #123f2c, #061c12);
   display:flex;
   align-items:center;
@@ -537,7 +538,6 @@ ul{
 }
 
 @media(max-width:800px){
-  .tcg-photo{ height:150px; }
   .tcg-name{ font-size:17px; }
   .tcg-skill-desc{ font-size:12px; }
   .tcg-bottom{ font-size:10px; }
@@ -569,7 +569,9 @@ ul{
 
 .card-overlay-inner{
   width:100%;
-  max-width:380px;
+  max-width:400px;
+  max-height:92vh;
+  overflow-y:auto;
   transform:scale(.82) rotateY(-90deg);
   opacity:0;
   transition:transform .5s cubic-bezier(.2,1.3,.35,1), opacity .35s ease;
@@ -581,12 +583,10 @@ ul{
 }
 
 .card-overlay-inner .tcg-card{
-  min-height:64vh;
   padding:24px;
   gap:14px;
 }
 
-.card-overlay-inner .tcg-photo{ height:34vh; }
 .card-overlay-inner .tcg-name{ font-size:23px; }
 .card-overlay-inner .tcg-type{ font-size:12px; padding:4px 11px; }
 .card-overlay-inner .tcg-hp{ font-size:13px; }
