@@ -313,7 +313,6 @@ ul{
   opacity:0;
   transform:translateY(16px);
   transition:opacity .5s ease, transform .5s ease;
-  perspective:1400px;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
 }
@@ -330,15 +329,9 @@ ul{
   position:relative;
   width:100%;
   height:100%;
-  transform-style:preserve-3d;
-  transition:transform .7s cubic-bezier(.4,.2,.2,1);
 }
 
-.member.is-flipped .member-flip{ transform:rotateY(180deg); }
-
 .member-face{
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
   border-radius:18px;
   height:100%;
 }
@@ -392,6 +385,8 @@ ul{
   border-radius:999px;
   font-size:13px;
 }
+
+.member-back{ display:none; }
 
 .flip-hint{
   display:block;
@@ -487,10 +482,13 @@ ul{
   overflow:hidden;
   border:2px solid var(--gold);
   height:110px;
-  background:#0a2e20;
+  background:radial-gradient(circle at 50% 40%, #123f2c, #061c12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.tcg-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.tcg-photo img{ width:100%; height:100%; object-fit:contain; display:block; }
 
 .tcg-caption{
   font-size:9px;
@@ -543,6 +541,73 @@ ul{
   .tcg-name{ font-size:17px; }
   .tcg-skill-desc{ font-size:12px; }
   .tcg-bottom{ font-size:10px; }
+}
+
+.card-overlay{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:rgba(4,12,8,.84);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px 22px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+
+.card-overlay.is-open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.card-overlay-inner{
+  width:100%;
+  max-width:380px;
+  transform:scale(.82) rotateY(-90deg);
+  opacity:0;
+  transition:transform .5s cubic-bezier(.2,1.3,.35,1), opacity .35s ease;
+}
+
+.card-overlay.is-open .card-overlay-inner{
+  transform:scale(1) rotateY(0deg);
+  opacity:1;
+}
+
+.card-overlay-inner .tcg-card{
+  min-height:64vh;
+  padding:24px;
+  gap:14px;
+}
+
+.card-overlay-inner .tcg-photo{ height:34vh; }
+.card-overlay-inner .tcg-name{ font-size:23px; }
+.card-overlay-inner .tcg-type{ font-size:12px; padding:4px 11px; }
+.card-overlay-inner .tcg-hp{ font-size:13px; }
+.card-overlay-inner .tcg-hp b{ font-size:20px; }
+.card-overlay-inner .tcg-caption{ font-size:12.5px; }
+.card-overlay-inner .tcg-skill{ padding:9px 0; }
+.card-overlay-inner .tcg-skill-icon{ font-size:21px; }
+.card-overlay-inner .tcg-skill-name{ font-size:15.5px; }
+.card-overlay-inner .tcg-skill-power{ font-size:15.5px; }
+.card-overlay-inner .tcg-skill-desc{ font-size:14px; line-height:1.7; }
+.card-overlay-inner .tcg-bottom{ font-size:11.5px; }
+.card-overlay-inner .tcg-footer{ font-size:11px; padding-top:10px; }
+
+.card-overlay-hint{
+  margin-top:20px;
+  text-align:center;
+  color:var(--gold-bright);
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.5px;
+  opacity:.85;
 }
 
 .record{
@@ -755,7 +820,7 @@ footer{
   <section class="card" id="members">
     <h2>협회 임원진</h2>
     <div class="members">
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>한창희</h3>
@@ -773,7 +838,7 @@ footer{
                 <span class="tcg-name">한창희</span>
                 <span class="tcg-hp">주량<b>300</b></span>
               </div>
-              <div class="tcg-photo"><img src="./KakaoTalk_20260520_101819009.png" alt="한창희"></div>
+              <div class="tcg-photo"><img src="./한창희_카드.png" alt="한창희"></div>
               <p class="tcg-caption">협회 인증카드 No.01 · 협회장</p>
               <div class="tcg-skill">
                 <span class="tcg-skill-icon">🍶</span>
@@ -791,7 +856,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>김성민</h3>
@@ -812,7 +877,7 @@ footer{
                 <span class="tcg-name">김성민</span>
                 <span class="tcg-hp">주량<b>400</b></span>
               </div>
-              <div class="tcg-photo"><img src="./KakaoTalk_20260520_101819009.png" alt="김성민"></div>
+              <div class="tcg-photo"><img src="./김성민_카드.png" alt="김성민"></div>
               <p class="tcg-caption">협회 인증카드 No.02 · 해외지부 운영총괄</p>
               <div class="tcg-skill">
                 <span class="tcg-skill-icon">🍶</span>
@@ -830,7 +895,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>정철현</h3>
@@ -852,7 +917,7 @@ footer{
                 <span class="tcg-name">정철현</span>
                 <span class="tcg-hp">주량<b>250</b></span>
               </div>
-              <div class="tcg-photo"><img src="./KakaoTalk_20260520_101819009.png" alt="정철현"></div>
+              <div class="tcg-photo"><img src="./정철현_카드.png" alt="정철현"></div>
               <p class="tcg-caption">협회 인증카드 No.03 · 감사</p>
               <div class="tcg-skill">
                 <span class="tcg-skill-icon">🍶</span>
@@ -870,7 +935,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>송병완</h3>
@@ -891,7 +956,7 @@ footer{
                 <span class="tcg-name">송병완</span>
                 <span class="tcg-hp">주량<b>200</b></span>
               </div>
-              <div class="tcg-photo"><img src="./KakaoTalk_20260520_101819009.png" alt="송병완"></div>
+              <div class="tcg-photo"><img src="./송병완_카드.png" alt="송병완"></div>
               <p class="tcg-caption">협회 인증카드 No.04 · 상무이사</p>
               <div class="tcg-skill">
                 <span class="tcg-skill-icon">🍶</span>
@@ -909,7 +974,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>허근영</h3>
@@ -930,7 +995,7 @@ footer{
                 <span class="tcg-name">허근영</span>
                 <span class="tcg-hp">주량<b>200</b></span>
               </div>
-              <div class="tcg-photo"><img src="./KakaoTalk_20260520_101819009.png" alt="허근영"></div>
+              <div class="tcg-photo"><img src="./허근영_카드.png" alt="허근영"></div>
               <p class="tcg-caption">협회 인증카드 No.05 · 전무이사</p>
               <div class="tcg-skill">
                 <span class="tcg-skill-icon">🍶</span>
@@ -948,7 +1013,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="member" onclick="this.classList.toggle('is-flipped')">
+      <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
           <div class="member-face member-front">
             <h3>최민규</h3>
@@ -2543,6 +2608,24 @@ window.onclick = function(event) {
   }
 }
 
+function openMemberCard(el) {
+  var src = el.querySelector('.tcg-card');
+  if (!src) return;
+  var overlay = document.getElementById('cardOverlay');
+  var inner = document.getElementById('cardOverlayInner');
+  inner.innerHTML = '';
+  inner.appendChild(src.cloneNode(true));
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCardOverlay(event) {
+  if (event && event.target.closest('.card-overlay-inner')) return;
+  var overlay = document.getElementById('cardOverlay');
+  overlay.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
 function recommendPlace() {
 
  const places = [
@@ -2630,6 +2713,11 @@ window.addEventListener('scroll', function () {
   }
 }, { passive: true });
 </script>
+
+<div id="cardOverlay" class="card-overlay" onclick="closeCardOverlay(event)">
+  <div class="card-overlay-inner" id="cardOverlayInner"></div>
+  <div class="card-overlay-hint">빈 곳을 탭하면 닫힙니다</div>
+</div>
 
 <button id="topButton" onclick="scrollToTop()">
   ↑
