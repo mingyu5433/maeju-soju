@@ -2725,12 +2725,6 @@ function scrollToTop(){
   window.scrollTo({ top:0, behavior:"smooth" });
 }
 
-window.addEventListener('load', function () {
-  setTimeout(function () {
-    window.scrollTo(0, 0);
-  }, 0);
-});
-
 document.addEventListener('DOMContentLoaded', function () {
   var cards = document.querySelectorAll('.card');
   if ('IntersectionObserver' in window) {
