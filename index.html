@@ -222,27 +222,44 @@ nav.scrolled{
 
 nav a{
   display:inline-block;
-  margin:5px;
-  padding:10px 18px;
-  border-radius:999px;
-  background:#eef4ee;
+  position:relative;
+  margin:5px 14px;
+  padding:8px 2px;
+  background:none;
   color:var(--pine-deep);
   text-decoration:none;
-  font-weight:800;
+  font-family:var(--serif);
+  font-weight:700;
   font-size:14px;
-  transition:.25s cubic-bezier(.3,.8,.4,1);
+  letter-spacing:1px;
+  transition:.25s ease;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:50%; right:50%;
+  bottom:0;
+  height:1.5px;
+  background:var(--gold);
+  transition:left .3s ease, right .3s ease;
 }
 
 nav a:hover, nav a:active{
-  background:var(--pine);
-  color:var(--gold-bright);
-  transform:translateY(-2px);
+  color:var(--pine);
+}
+
+nav a:hover::after, nav a:active::after{
+  left:0; right:0;
 }
 
 nav a.active{
-  background:var(--pine);
-  color:var(--gold-bright);
-  box-shadow:0 0 0 2px rgba(205,168,106,.5);
+  color:var(--pine-deep);
+  font-weight:900;
+}
+
+nav a.active::after{
+  left:0; right:0;
 }
 
 .utility-buttons{
@@ -252,7 +269,7 @@ nav a.active{
   padding:0 20px;
   display:flex;
   justify-content:flex-end;
-  gap:10px;
+  gap:12px;
   box-sizing:border-box;
   position:relative;
   z-index:2;
@@ -261,36 +278,27 @@ nav a.active{
 .utility-buttons button{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-  border:1px solid rgba(205,168,106,.45);
-  background:linear-gradient(180deg,#fffdf6,#f3ead4);
+  border:1px solid var(--gold);
+  background:transparent;
   color:var(--pine-deep);
-  padding:11px 18px;
-  border-radius:12px;
-  font-family:var(--sans);
-  font-weight:800;
-  font-size:13px;
+  padding:11px 20px;
+  border-radius:3px;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:12.5px;
+  letter-spacing:1.2px;
   white-space:nowrap;
   cursor:pointer;
   transition:.2s ease;
-  box-shadow:0 2px 6px rgba(5,20,14,.06);
-}
-
-.ub-icon{
-  font-size:14px;
-  line-height:1;
-  filter:saturate(1.1);
 }
 
 .utility-buttons button:hover{
-  background:var(--pine);
+  background:var(--pine-deep);
   color:var(--gold-bright);
-  border-color:var(--gold);
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-soft);
+  border-color:var(--gold-bright);
 }
 
-.utility-buttons button:active{ transform:scale(.96); }
+.utility-buttons button:active{ transform:scale(.97); }
 
 .container{
   max-width:1100px;
@@ -787,21 +795,13 @@ footer{
 </nav>
 
 <div class="utility-buttons">
-  <button onclick="location.href='game.html'">
-    <span class="ub-icon">🎡</span>돌림판
-  </button>
+  <button onclick="location.href='game.html'">돌림판</button>
 
-  <button onclick="openModal('secretModal')">
-    <span class="ub-icon">🗄️</span>문서함
-  </button>
+  <button onclick="openModal('secretModal')">문서함</button>
 
-  <button onclick="location.href='memoir.html'">
-    <span class="ub-icon">📖</span>협회장 회고록
-  </button>
+  <button onclick="location.href='memoir.html'">협회장 회고록</button>
 
-  <button onclick="openModal('greetingModal')">
-    <span class="ub-icon">✒️</span>협회장 인사말
-  </button>
+  <button onclick="openModal('greetingModal')">협회장 인사말</button>
 </div>
 
 <div class="container">
