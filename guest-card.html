@@ -479,6 +479,11 @@ nav a:hover::after{ left:0; right:0; }
     <button class="dl-btn" id="downloadBtn" onclick="downloadCard()">이미지로 저장</button>
     <p class="hint">저장한 이미지를 카톡이나 갤러리에 바로 공유할 수 있어요.</p>
 
+    <div id="saveImageWrap" style="display:none;">
+      <p class="hint" style="margin-top:16px; font-weight:700;">저장이 안 되면, 아래 이미지를 길게 눌러 "사진에 저장"을 선택하세요.</p>
+      <img id="saveImage" alt="임시회원증" style="width:100%; max-width:340px; border-radius:12px; margin-top:8px;">
+    </div>
+
     <div class="notice-box">
       <span class="notice-label">협회 공지</span>
       <p>임시회원증이 누적 7회 이상<br>발급된 자에 한하여,<br>정식 협회 임원진<br>심사 대상 자격이 부여된다.</p>
@@ -545,15 +550,38 @@ function generateCard(){
 function downloadCard(){
   const btn = document.getElementById('downloadBtn');
   btn.disabled = true;
-  btn.textContent = '저장 중...';
+  btn.textContent = '이미지 생성 중...';
 
   html2canvas(document.getElementById('guestCard'), { backgroundColor: null, scale: 2 }).then(function (canvas) {
-    const link = document.createElement('a');
-    link.download = '매주술권장협회_임시회원증.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    btn.disabled = false;
-    btn.textContent = '이미지로 저장';
+    const dataUrl = canvas.toDataURL('image/png');
+
+    const saveImage = document.getElementById('saveImage');
+    saveImage.src = dataUrl;
+    document.getElementById('saveImageWrap').style.display = 'block';
+
+    canvas.toBlob(async function (blob) {
+      if (blob && navigator.canShare && navigator.canShare({ files: [new File([blob], 'card.png', { type: 'image/png' })] })) {
+        try {
+          const file = new File([blob], '매주술권장협회_임시회원증.png', { type: 'image/png' });
+          await navigator.share({ files: [file], title: '매주술권장협회 임시회원증' });
+          btn.disabled = false;
+          btn.textContent = '이미지로 저장';
+          return;
+        } catch (err) {
+          // 공유 취소 또는 실패 시 아래 다운로드 링크/길게 누르기 안내로 진행
+        }
+      }
+
+      const link = document.createElement('a');
+      link.download = '매주술권장협회_임시회원증.png';
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      btn.disabled = false;
+      btn.textContent = '이미지로 저장';
+    }, 'image/png');
   }).catch(function () {
     btn.disabled = false;
     btn.textContent = '이미지로 저장';
