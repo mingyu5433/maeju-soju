@@ -186,6 +186,12 @@ nav a:hover, nav a:active{
   transform:translateY(-2px);
 }
 
+nav a.active{
+  background:var(--pine);
+  color:var(--gold-bright);
+  box-shadow:0 0 0 2px rgba(205,168,106,.5);
+}
+
 .utility-buttons{
   width:100%;
   max-width:1100px;
@@ -1091,7 +1097,7 @@ footer{
   </button>
 </div>
 
-<div class="news-ticker"><div class="news-ticker-track">[단독] 최민규 상근부회장 “금요일 협회진 모임 원한다” ㅣ [경제] 정철현 “소주 도수 떨어지기 전에 지금 마셔야” ㅣ [건강] 허근영, 몸 상태 ‘술 마시기 딱 좋은 상태’로 회복 ㅣ [날씨] 한창희 “내일 날씨는 모르겠지만 술 마시기 좋은 날씨일 것” ㅣ [연예] 김성민, 리센느 미나미에 푹 빠져 ㅣ [e스포츠] 송병완, “게임처럼 즐거운 술자리 참석에 갈증 느껴” ·</div></div>
+<div class="news-ticker"><div class="news-ticker-track">[단독] 최민규 상근부회장 "금요일 협회진 모임 원한다" ㅣ [경제] 정철현 "소주 도수 떨어지기 전에 지금 마셔야" ㅣ [건강] 허근영, 몸 상태 '술 마시기 딱 좋은 상태'로 회복 ㅣ [날씨] 한창희 "내일 날씨는 모르겠지만 술 마시기 좋은 날씨일 것" ㅣ [연예] 김성민, 리센느 미나미에 푹 빠져 ㅣ [e스포츠] 송병완, "게임처럼 즐거운 술자리 참석에 갈증 느껴" ㅣ 　　　[단독] 최민규 상근부회장 "금요일 협회진 모임 원한다" ㅣ [경제] 정철현 "소주 도수 떨어지기 전에 지금 마셔야" ㅣ [건강] 허근영, 몸 상태 '술 마시기 딱 좋은 상태'로 회복 ㅣ [날씨] 한창희 "내일 날씨는 모르겠지만 술 마시기 좋은 날씨일 것" ㅣ [연예] 김성민, 리센느 미나미에 푹 빠져 ㅣ [e스포츠] 송병완, "게임처럼 즐거운 술자리 참석에 갈증 느껴" ㅣ</div></div>
 
   <div class="news-wrapper">
 
@@ -2749,6 +2755,30 @@ window.addEventListener('scroll', function () {
     else nav.classList.remove('scrolled');
   }
 }, { passive: true });
+
+document.addEventListener('DOMContentLoaded', function () {
+  var sectionIds = ['about', 'history', 'rules', 'talent', 'members', 'news'];
+  var sections = sectionIds
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  var navLinks = document.querySelectorAll('nav a');
+
+  function setActiveLink(id) {
+    navLinks.forEach(function (link) {
+      if (link.getAttribute('href') === '#' + id) link.classList.add('active');
+      else link.classList.remove('active');
+    });
+  }
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActiveLink(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+});
 </script>
 
 <div id="cardOverlay" class="card-overlay" onclick="closeCardOverlay(event)">
