@@ -189,7 +189,7 @@ nav a:hover, nav a:active{
 .utility-buttons{
   width:100%;
   max-width:1100px;
-  margin:16px auto 0;
+  margin:18px auto 0;
   padding:0 20px;
   display:flex;
   justify-content:flex-end;
@@ -200,20 +200,33 @@ nav a:hover, nav a:active{
 }
 
 .utility-buttons button{
-  border:1px solid rgba(205,168,106,.4);
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid rgba(205,168,106,.45);
   background:linear-gradient(180deg,#fffdf6,#f3ead4);
   color:var(--pine-deep);
-  padding:10px 16px;
-  border-radius:999px;
+  padding:11px 18px;
+  border-radius:12px;
+  font-family:var(--sans);
   font-weight:800;
   font-size:13px;
+  white-space:nowrap;
   cursor:pointer;
   transition:.2s ease;
+  box-shadow:0 2px 6px rgba(5,20,14,.06);
+}
+
+.ub-icon{
+  font-size:14px;
+  line-height:1;
+  filter:saturate(1.1);
 }
 
 .utility-buttons button:hover{
   background:var(--pine);
   color:var(--gold-bright);
+  border-color:var(--gold);
   transform:translateY(-2px);
   box-shadow:var(--shadow-soft);
 }
@@ -665,7 +678,21 @@ footer{
   .hero h2{font-size:30px;}
   .members{grid-template-columns:1fr;}
   .card{padding:24px;}
-  nav a{font-size:13px;padding:9px 14px;}
+  nav{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    padding:12px;
+    text-align:initial;
+  }
+  nav a{
+    margin:0;
+    width:100%;
+    box-sizing:border-box;
+    text-align:center;
+    font-size:13px;
+    padding:11px 6px;
+  }
 }
 </style>
 </head>
@@ -682,29 +709,29 @@ footer{
 </header>
 
 <nav>
-  <a href="#about">협회 소개</a>
-  <a href="#history">협회 연혁</a>
+  <a href="#about">소개</a>
+  <a href="#history">연혁</a>
   <a href="#rules">협회칙</a>
   <a href="#talent">인재상</a>
-  <a href="#members">협회 임원진</a>
- <a href="#news">협회 보도자료</a>
+  <a href="#members">임원진</a>
+ <a href="#news">보도자료</a>
 </nav>
 
 <div class="utility-buttons">
   <button onclick="location.href='memoir.html'">
-    협회장 회고록
+    <span class="ub-icon">📖</span>협회장 회고록
   </button>
 
   <button onclick="location.href='game.html'">
-    협회 술자리 돌림판
+    <span class="ub-icon">🎡</span>돌림판
   </button>
 
   <button onclick="openModal('greetingModal')">
-    협회장 인사말
+    <span class="ub-icon">✒️</span>협회장 인사말
   </button>
 
   <button onclick="openModal('secretModal')">
-    협회 문서함
+    <span class="ub-icon">🗄️</span>문서함
   </button>
 </div>
 
@@ -2506,8 +2533,19 @@ mingyu5433@gmail.com
   }
   .hero p{ font-size:16px; line-height:1.75; word-break:keep-all; }
   .hero img{ margin-top:28px; border-radius:20px; }
-  .utility-buttons{ justify-content:center; flex-wrap:wrap; margin-top:18px; }
-  .utility-buttons button{ font-size:13px; padding:10px 15px; }
+  .utility-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+    margin-top:18px;
+  }
+  .utility-buttons button{
+    width:100%;
+    box-sizing:border-box;
+    justify-content:center;
+    font-size:12.5px;
+    padding:12px 8px;
+  }
   #topButton{ width:48px; height:48px; right:18px; bottom:22px; }
 }
 
