@@ -346,6 +346,43 @@ nav a.active::after{
   padding-bottom:14px;
 }
 
+.members-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  border-bottom:2px solid var(--pine);
+  padding-bottom:14px;
+}
+
+.members-header h2{
+  border-bottom:none;
+  padding-bottom:0;
+  margin:0;
+}
+
+.members-issue-btn{
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--pine-deep);
+  padding:9px 18px;
+  border-radius:3px;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:12.5px;
+  letter-spacing:.8px;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.members-issue-btn:hover{
+  background:var(--pine-deep);
+  color:var(--gold-bright);
+  border-color:var(--gold-bright);
+}
+
 .hero{
   display:grid;
   grid-template-columns:1.5fr .8fr;
@@ -795,8 +832,6 @@ footer{
 </nav>
 
 <div class="utility-buttons">
-  <button onclick="location.href='guest-card.html'">임시회원증</button>
-
   <button onclick="location.href='game.html'">돌림판</button>
 
   <button onclick="openModal('secretModal')">문서함</button>
@@ -920,7 +955,10 @@ footer{
   </section>
 
   <section class="card" id="members">
-    <h2>협회 임원진</h2>
+    <div class="members-header">
+      <h2>협회 임원진</h2>
+      <button class="members-issue-btn" onclick="location.href='guest-card.html'">임시회원증 발급</button>
+    </div>
     <div class="members">
       <div class="member" onclick="openMemberCard(this)">
         <div class="member-flip">
