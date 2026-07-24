@@ -495,7 +495,6 @@ nav a:hover::after{ left:0; right:0; }
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 
 const photoInput = document.getElementById('photoInput');
@@ -508,7 +507,7 @@ photoInput.addEventListener('change', function () {
   const reader = new FileReader();
   reader.onload = function (e) {
     photoDataUrl = e.target.result;
-    photoDropLabel.textContent = file.name + ' 선택됨';
+    photoDropLabel.textContent = file.name + ' \uc120\ud0dd\ub428';
   };
   reader.readAsDataURL(file);
 });
@@ -522,10 +521,10 @@ function formatDateCode(d){
 function generateCard(){
   const name = document.getElementById('guestName').value.trim();
   if (!name) {
-    alert('이름을 입력해주세요.');
+    alert('\uc774\ub984\uc744 \uc785\ub825\ud574\uc8fc\uc138\uc694.');
     return;
   }
-  const skillText = document.getElementById('guestSkill').value.trim() || '임시회원';
+  const skillText = document.getElementById('guestSkill').value.trim() || '\uc784\uc2dc\ud68c\uc6d0';
 
   document.getElementById('gcName').textContent = name;
   document.getElementById('gcSkillName').textContent = skillText;
@@ -543,50 +542,208 @@ function generateCard(){
     placeholder.style.display = 'block';
   }
 
+  document.getElementById('saveImageWrap').style.display = 'none';
   document.getElementById('resultWrap').style.display = 'flex';
   document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function roundedRectPath(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function drawImageCover(ctx, img, x, y, w, h){
+  const iw = img.naturalWidth, ih = img.naturalHeight;
+  if (!iw || !ih) return;
+  const ir = iw / ih, tr = w / h;
+  let sx, sy, sw, sh;
+  if (ir > tr) {
+    sh = ih; sw = ih * tr; sx = (iw - sw) / 2; sy = 0;
+  } else {
+    sw = iw; sh = iw / tr; sx = 0; sy = (ih - sh) / 2;
+  }
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+}
+
+function buildCardCanvas(){
+  const W = 340, H = 470;
+  const scale = 3;
+  const canvas = document.createElement('canvas');
+  canvas.width = W * scale;
+  canvas.height = H * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(scale, scale);
+
+  const pad = 18;
+  const innerW = W - pad * 2;
+
+  roundedRectPath(ctx, 1.5, 1.5, W - 3, H - 3, 18);
+  const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+  bgGrad.addColorStop(0, '#eef8dd');
+  bgGrad.addColorStop(1, '#dcefc0');
+  ctx.fillStyle = bgGrad;
+  ctx.fill();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = '#b7cf8f';
+  ctx.stroke();
+
+  let y = pad;
+
+  const name = document.getElementById('gcName').textContent || '\uc774\ub984';
+  const badgeText = '\uc784\uc2dc\ud68c\uc6d0';
+
+  ctx.font = '700 9px Pretendard, sans-serif';
+  const badgeW = ctx.measureText(badgeText).width + 18;
+  roundedRectPath(ctx, pad, y, badgeW, 17, 8.5);
+  ctx.fillStyle = 'rgba(255,255,255,.65)';
+  ctx.fill();
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#7f9a5a';
+  ctx.stroke();
+  ctx.fillStyle = '#33501f';
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  ctx.fillText(badgeText, pad + badgeW / 2, y + 9);
+
+  ctx.font = '700 12px "JetBrains Mono", monospace';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#213619';
+  ctx.fillText('\uce21\uc815\ubd88\uac00', W - pad, y + 9);
+  const hpValW = ctx.measureText('\uce21\uc815\ubd88\uac00').width;
+  ctx.font = '700 9.5px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#3d5a2a';
+  ctx.fillText('\uc8fc\ub7c9', W - pad - hpValW - 4, y + 9);
+
+  ctx.font = '900 15px "Noto Serif KR", serif';
+  ctx.fillStyle = '#213619';
+  ctx.textAlign = 'center';
+  ctx.fillText(name, W / 2, y + 9, innerW - badgeW - 60);
+
+  y += 17 + 10;
+
+  const photoH = innerW / 1.4;
+  roundedRectPath(ctx, pad, y, innerW, photoH, 10);
+  ctx.save();
+  ctx.clip();
+  const photoImg = document.getElementById('gcPhotoImg');
+  if (photoImg.style.display === 'block' && photoImg.complete && photoImg.naturalWidth) {
+    drawImageCover(ctx, photoImg, pad, y, innerW, photoH);
+  } else {
+    ctx.fillStyle = '#123420';
+    ctx.fillRect(pad, y, innerW, photoH);
+    ctx.fillStyle = 'rgba(244,236,216,.55)';
+    ctx.font = '11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('\uc0ac\uc9c4 \ubbf8\ub4f1\ub85d', pad + innerW / 2, y + photoH / 2);
+  }
+  ctx.restore();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#7f9a5a';
+  roundedRectPath(ctx, pad, y, innerW, photoH, 10);
+  ctx.stroke();
+
+  y += photoH + 12;
+
+  ctx.font = '700 9px Pretendard, sans-serif';
+  ctx.fillStyle = '#4f6a3b';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('\ub9e4\uc8fc\uc220\uad8c\uc7a5\ud611\ud68c \ube44\uacf5\uc2dd \uac8c\uc2a4\ud2b8', pad, y);
+
+  y += 16;
+
+  ctx.strokeStyle = 'rgba(40,64,31,.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(pad + innerW, y); ctx.stroke();
+
+  y += 17;
+  ctx.textBaseline = 'middle';
+  ctx.font = '15px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('\ud83c\udf76', pad, y);
+
+  const skillText = document.getElementById('gcSkillName').textContent || '\uc784\uc2dc\ud68c\uc6d0';
+  ctx.font = '800 12px Pretendard, sans-serif';
+  ctx.fillStyle = '#213619';
+  ctx.fillText(skillText, pad + 22, y, innerW - 60);
+
+  ctx.font = '700 12px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#33501f';
+  ctx.textAlign = 'right';
+  const power = document.getElementById('gcSkillPower').textContent || '0';
+  ctx.fillText(power, pad + innerW, y);
+
+  y += 15;
+  ctx.textBaseline = 'alphabetic';
+  ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(pad + innerW, y); ctx.stroke();
+
+  y += 17;
+  ctx.font = '10.5px Pretendard, sans-serif';
+  ctx.fillStyle = '#3d5228';
+  ctx.textAlign = 'left';
+  ctx.fillText('\ub9e4\uc8fc\uc220\uad8c\uc7a5\ud611\ud68c \uc784\uc6d0\uc9c4\uc758 \ub9cc\uc7a5\uc77c\uce58 \uacb0\uc758\uc5d0 \ub530\ub77c', pad, y);
+  y += 15;
+  ctx.fillText('\uae08\uc77c \uc784\uc2dc\ud68c\uc6d0 \uc790\uaca9\uc744 \uc778\uc815\ud558\uace0 \uc774\ub97c \ubc1c\uae09\ud55c\ub2e4.', pad, y);
+
+  y += 22;
+  ctx.font = '8.5px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#5a6e46';
+  ctx.textAlign = 'left';
+  ctx.fillText('\uc57d\uc810 ???', pad, y);
+  ctx.textAlign = 'right';
+  ctx.fillText('\ud0c8\ucd9c\ube44\uc6a9 \ud83c\udf31', pad + innerW, y);
+
+  y += 14;
+  ctx.strokeStyle = 'rgba(40,64,31,.35)';
+  ctx.setLineDash([2, 2]);
+  ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(pad + innerW, y); ctx.stroke();
+  ctx.setLineDash([]);
+
+  y += 15;
+  const dcode = document.getElementById('gcNo').textContent || formatDateCode(new Date());
+  ctx.font = '700 9px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#33501f';
+  ctx.textAlign = 'center';
+  ctx.fillText('\ud611\ud68c \uacf5\uc2dd \ubc1c\ud589 \u00b7 No.' + dcode, W / 2, y);
+
+  return canvas;
+}
+
 function downloadCard(){
   const btn = document.getElementById('downloadBtn');
+  if (!document.getElementById('gcName').textContent || document.getElementById('gcName').textContent === '\uc774\ub984') {
+    alert('\uba3c\uc800 \uc784\uc2dc\ud68c\uc6d0\uc99d \ubc1c\uae09\ud558\uae30\ub97c \ub20c\ub7ec\uc8fc\uc138\uc694.');
+    return;
+  }
+
   btn.disabled = true;
-  btn.textContent = '이미지 생성 중...';
+  btn.textContent = '\uc774\ubbf8\uc9c0 \uc0dd\uc131 \uc911...';
 
-  html2canvas(document.getElementById('guestCard'), { backgroundColor: null, scale: 2 }).then(function (canvas) {
-    const dataUrl = canvas.toDataURL('image/png');
+  const canvas = buildCardCanvas();
+  const dataUrl = canvas.toDataURL('image/png');
 
-    const saveImage = document.getElementById('saveImage');
-    saveImage.src = dataUrl;
-    document.getElementById('saveImageWrap').style.display = 'block';
+  const saveImage = document.getElementById('saveImage');
+  saveImage.src = dataUrl;
+  document.getElementById('saveImageWrap').style.display = 'block';
 
-    canvas.toBlob(async function (blob) {
-      if (blob && navigator.canShare && navigator.canShare({ files: [new File([blob], 'card.png', { type: 'image/png' })] })) {
-        try {
-          const file = new File([blob], '매주술권장협회_임시회원증.png', { type: 'image/png' });
-          await navigator.share({ files: [file], title: '매주술권장협회 임시회원증' });
-          btn.disabled = false;
-          btn.textContent = '이미지로 저장';
-          return;
-        } catch (err) {
-          // 공유 취소 또는 실패 시 아래 다운로드 링크/길게 누르기 안내로 진행
-        }
+  canvas.toBlob(async function (blob) {
+    if (blob && navigator.canShare && navigator.canShare({ files: [new File([blob], 'card.png', { type: 'image/png' })] })) {
+      try {
+        const file = new File([blob], '\ub9e4\uc8fc\uc220\uad8c\uc7a5\ud611\ud68c_\uc784\uc2dc\ud68c\uc6d0\uc99d.png', { type: 'image/png' });
+        await navigator.share({ files: [file], title: '\ub9e4\uc8fc\uc220\uad8c\uc7a5\ud611\ud68c \uc784\uc2dc\ud68c\uc6d0\uc99d' });
+      } catch (err) {
+        // \uacf5\uc720 \ucde8\uc18c \ub610\ub294 \ubbf8\uc9c0\uc6d0 \u2192 \uc544\ub798 \uc774\ubbf8\uc9c0 \uae38\uac8c \ub204\ub974\uae30 \uc548\ub0b4\ub85c \uc9c4\ud589
       }
-
-      const link = document.createElement('a');
-      link.download = '매주술권장협회_임시회원증.png';
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      btn.disabled = false;
-      btn.textContent = '이미지로 저장';
-    }, 'image/png');
-  }).catch(function () {
+    }
     btn.disabled = false;
-    btn.textContent = '이미지로 저장';
-    alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
-  });
+    btn.textContent = '\uc774\ubbf8\uc9c0\ub85c \uc800\uc7a5';
+    document.getElementById('saveImageWrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 'image/png');
 }
 
 </script>
