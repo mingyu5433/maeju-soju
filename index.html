@@ -69,8 +69,7 @@ header{
     radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
     linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
   color:#fdf8ea;
-  text-align:center;
-  padding:56px 20px 42px;
+  padding:48px 24px 40px;
   border-bottom:6px solid var(--gold);
   overflow:hidden;
   z-index:1;
@@ -84,36 +83,89 @@ header::after{
   pointer-events:none;
 }
 
+.header-inner{
+  position:relative;
+  z-index:1;
+  max-width:760px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:36px;
+  flex-wrap:wrap;
+}
+
+.header-text{
+  text-align:left;
+}
+
 .seal-wrap{
   position:relative;
   width:150px;
   height:150px;
-  margin:0 auto;
+  flex-shrink:0;
 }
 
 .seal-ring{
   position:absolute;
   inset:-10px;
   border-radius:50%;
-  border:2px dashed rgba(242,221,156,.55);
-  animation:sealSpin 22s linear infinite;
+  background:conic-gradient(from 0deg,
+    transparent 0%,
+    rgba(242,221,156,.15) 6%,
+    rgba(242,221,156,.95) 11%,
+    rgba(242,221,156,.15) 16%,
+    transparent 24%,
+    transparent 100%);
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  mask:radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  animation:sealSpin 4s linear infinite;
 }
 
 @keyframes sealSpin{
   to{ transform:rotate(360deg); }
 }
 
-.logo{
-  width:150px;
-  height:150px;
-  object-fit:cover;
+.badge-3d{
+  position:relative;
+  width:100%;
+  height:100%;
+  perspective:900px;
+  animation:stampIn .7s cubic-bezier(.2,1.5,.4,1) both;
+}
+
+.badge-3d-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+}
+
+.badge-face{
+  position:absolute;
+  inset:0;
   border-radius:50%;
+  overflow:hidden;
   background:#fff8ea;
   border:6px solid var(--gold-bright);
   box-shadow:0 14px 34px rgba(0,0,0,.35), 0 0 0 8px rgba(205,168,106,.12);
-  position:relative;
-  z-index:1;
-  animation:stampIn .7s cubic-bezier(.2,1.5,.4,1) both;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+
+.badge-face.back{ transform:rotateY(180deg); }
+
+.badge-face img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.badge-face.back img{ transform:scaleX(-1); }
+
+@keyframes coinSpin{
+  to{ transform:rotateY(360deg); }
 }
 
 @keyframes stampIn{
@@ -123,10 +175,10 @@ header::after{
 }
 
 header h1{
-  margin:26px 0 8px;
+  margin:0 0 8px;
   font-family:var(--serif);
   font-weight:900;
-  font-size:44px;
+  font-size:38px;
   letter-spacing:-.5px;
   background:linear-gradient(100deg, #fdf3d8 20%, var(--gold-bright) 40%, #fff 50%, var(--gold-bright) 60%, #fdf3d8 80%);
   background-size:220% auto;
@@ -143,11 +195,12 @@ header h1{
 header p{
   margin:0;
   font-family:var(--mono);
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
-  letter-spacing:2px;
+  letter-spacing:1.5px;
   color:var(--gold-bright);
   text-transform:uppercase;
+  line-height:1.6;
 }
 
 nav{
@@ -677,9 +730,10 @@ footer{
 }
 
 @media(max-width:800px){
-  header h1{font-size:32px;}
+  header h1{font-size:30px;}
   header p{font-size:11px;}
-  .logo,.seal-wrap{width:120px;height:120px;}
+  .seal-wrap{width:110px;height:110px;}
+  .header-inner{gap:20px;}
   .hero{grid-template-columns:1fr;}
   .hero h2{font-size:30px;}
   .members{grid-template-columns:1fr;}
@@ -706,12 +760,21 @@ footer{
 <body>
 
 <header>
-  <div class="seal-wrap">
-    <span class="seal-ring"></span>
-    <img class="logo" src="./KakaoTalk_20260520_101819009.png">
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>매주술권장협회</h1>
+      <p>Weekly Drinking Promotion<br>Association (WDPA)</p>
+    </div>
+    <div class="seal-wrap">
+      <span class="seal-ring"></span>
+      <div class="badge-3d">
+        <div class="badge-3d-inner">
+          <div class="badge-face front"><img src="./KakaoTalk_20260520_101819009.png"></div>
+          <div class="badge-face back"><img src="./KakaoTalk_20260520_101819009.png"></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <h1>매주술권장협회</h1>
-  <p>Weekly Drinking Promotion Association (WDPA)</p>
 </header>
 
 <nav>
@@ -724,20 +787,20 @@ footer{
 </nav>
 
 <div class="utility-buttons">
-  <button onclick="location.href='memoir.html'">
-    <span class="ub-icon">📖</span>협회장 회고록
-  </button>
-
   <button onclick="location.href='game.html'">
     <span class="ub-icon">🎡</span>돌림판
   </button>
 
-  <button onclick="openModal('greetingModal')">
-    <span class="ub-icon">✒️</span>협회장 인사말
-  </button>
-
   <button onclick="openModal('secretModal')">
     <span class="ub-icon">🗄️</span>문서함
+  </button>
+
+  <button onclick="location.href='memoir.html'">
+    <span class="ub-icon">📖</span>협회장 회고록
+  </button>
+
+  <button onclick="openModal('greetingModal')">
+    <span class="ub-icon">✒️</span>협회장 인사말
   </button>
 </div>
 
@@ -2523,9 +2586,11 @@ mingyu5433@gmail.com
 }
 
 @media(max-width:600px){
-  header{ padding:34px 16px 28px; }
-  header h1{ font-size:34px; }
-  header p{ font-size:11px; line-height:1.4; }
+  header{ padding:32px 20px 26px; }
+  header h1{ font-size:26px; }
+  header p{ font-size:10.5px; line-height:1.5; }
+  .seal-wrap{ width:96px; height:96px; }
+  .header-inner{ gap:16px; }
   .container{ padding:28px 16px; }
   .hero{ display:block; padding:32px 24px; text-align:left; }
   .hero h2{
