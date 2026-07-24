@@ -6,7 +6,7 @@
 <title>매주술권장협회</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#07462f">
-<link rel="apple-touch-icon" href="./KakaoTalk_20260520_101819009.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
 <style>
 
@@ -384,10 +384,7 @@ nav a.active::after{
 }
 
 .hero{
-  display:grid;
-  grid-template-columns:1.5fr .8fr;
-  gap:32px;
-  align-items:center;
+  display:block;
   background:#fffdf7;
 }
 
@@ -813,10 +810,10 @@ footer{
     </div>
     <div class="seal-wrap">
       <span class="seal-ring"></span>
-      <div class="badge-3d">
+      <div class="badge-3d" onclick="openModal('logoModal')" style="cursor:pointer;">
         <div class="badge-3d-inner">
-          <div class="badge-face front"><img src="./KakaoTalk_20260520_101819009.png"></div>
-          <div class="badge-face back"><img src="./KakaoTalk_20260520_101819009.png"></div>
+          <div class="badge-face front"><img src="./협회로고.jpg" loading="eager"></div>
+          <div class="badge-face back"><img src="./협회로고.jpg" loading="eager"></div>
         </div>
       </div>
     </div>
@@ -856,7 +853,6 @@ footer{
         회원 간 네트워크 활동을 이어가고 있는 단체입니다.
       </p>
     </div>
-    <img src="./KakaoTalk_20260520_101819009.png">
   </section>
 <section class="card" id="history">
 
@@ -1455,6 +1451,13 @@ mingyu5433@gmail.com
       열람 가능한 문서입니다.
     </p>
 
+  </div>
+</div>
+<div id="logoModal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <span class="close" onclick="closeModal('logoModal')">&times;</span>
+    <h3>매주술권장협회 공식 엠블럼</h3>
+    <img src="./협회로고.jpg" style="width:100%; border-radius:16px; margin-top:10px;" alt="협회 로고">
   </div>
 </div>
  <div id="newsModal1" class="modal">
