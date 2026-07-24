@@ -198,26 +198,27 @@ nav a:hover, nav a:active{
 
 .memoir-list button{
   width:100%;
-  border:1px solid #e2d3b4;
-  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  border:1px solid var(--gold);
+  background:transparent;
   padding:18px 20px;
-  border-radius:16px;
+  border-radius:3px;
   margin-bottom:12px;
   text-align:left;
-  font-size:18px;
-  font-weight:800;
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.5px;
   font-family:var(--serif);
   color:var(--pine-deep);
   cursor:pointer;
-  transition:.22s cubic-bezier(.3,.8,.4,1);
+  transition:.22s ease;
 }
 
 .memoir-list button:not(:disabled):hover,
 .memoir-list button:not(:disabled):active{
-  background:var(--pine);
+  background:var(--pine-deep);
   color:var(--gold-bright);
   transform:translateX(6px);
-  border-color:var(--gold);
+  border-color:var(--gold-bright);
 }
 
 .memoir-list button:disabled{
@@ -228,31 +229,38 @@ nav a:hover, nav a:active{
 .back-button{
   display:inline-block;
   margin-top:20px;
-  padding:12px 20px;
-  background:var(--pine);
-  color:var(--gold-bright);
-  border-radius:999px;
+  padding:12px 22px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--pine-deep);
+  border-radius:3px;
   text-decoration:none;
-  font-weight:800;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1px;
   transition:.2s ease;
 }
 
-.back-button:hover{ background:var(--pine-deep); transform:translateY(-2px); }
+.back-button:hover{ background:var(--pine-deep); color:var(--gold-bright); border-color:var(--gold-bright); }
 
 .bgm-box{ margin:18px 0 34px; }
 
 .bgm-box button{
-  border:1px solid rgba(205,168,106,.5);
-  background:var(--pine);
-  color:var(--gold-bright);
-  padding:11px 18px;
-  border-radius:999px;
-  font-weight:800;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--pine-deep);
+  padding:11px 20px;
+  border-radius:3px;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.8px;
   cursor:pointer;
   transition:.2s ease;
 }
 
-.bgm-box button:hover{ background:var(--pine-deep); transform:translateY(-2px); }
+.bgm-box button:hover{ background:var(--pine-deep); color:var(--gold-bright); border-color:var(--gold-bright); }
 
 .bgm-player{
   display:none;
