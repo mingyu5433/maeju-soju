@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>협회 술자리 돌림판 | 매주술권장협회</title>
+
+<style>
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --ink:#081d15;
+  --pine:#0b3d2b;
+  --pine-deep:#04150e;
+  --pine-light:#155a3d;
+  --gold:#cda86a;
+  --gold-bright:#f2dd9c;
+  --paper:#f6efdf;
+  --paper-dim:#ece0c6;
+  --text:#1c2b22;
+  --text-soft:#5a6a5f;
+  --crimson:#8c1f2b;
+  --r-lg:22px;
+  --shadow-soft:0 10px 30px rgba(5,20,14,.12);
+  --shadow-deep:0 26px 60px rgba(2,10,6,.45);
+  --serif:'Noto Serif KR',serif;
+  --sans:'Pretendard','Noto Sans KR',Arial,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:
+    radial-gradient(circle at 15% -10%, rgba(205,168,106,.16), transparent 40%),
+    var(--paper);
+  color:var(--text);
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+header{
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
+    linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
+  color:#fdf8ea;
+  text-align:center;
+  padding:50px 20px 36px;
+  border-bottom:6px solid var(--gold);
+  overflow:hidden;
+  z-index:1;
+}
+
+.seal-wrap{ position:relative; width:120px; height:120px; margin:0 auto; }
+
+.seal-ring{
+  position:absolute;
+  inset:-9px;
+  border-radius:50%;
+  border:2px dashed rgba(242,221,156,.55);
+  animation:sealSpin 22s linear infinite;
+}
+
+@keyframes sealSpin{ to{ transform:rotate(360deg); } }
+
+.logo{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:50%;
+  background:#fff8ea;
+  border:5px solid var(--gold-bright);
+  box-shadow:0 12px 28px rgba(0,0,0,.35), 0 0 0 7px rgba(205,168,106,.12);
+  position:relative;
+  z-index:1;
+}
+
+header h1{
+  margin:22px 0 8px;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:38px;
+  background:linear-gradient(100deg, #fdf3d8 20%, var(--gold-bright) 40%, #fff 50%, var(--gold-bright) 60%, #fdf3d8 80%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shimmer 5s linear infinite;
+}
+
+@keyframes shimmer{ to{ background-position:-220% center; } }
+
+header p{
+  margin:0;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:var(--gold-bright);
+  text-transform:uppercase;
+}
+
+nav{
+  background:rgba(255,253,247,.85);
+  padding:16px 10px;
+  text-align:center;
+  border-bottom:1px solid #ddcdb2;
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(10px) saturate(1.4);
+  -webkit-backdrop-filter:blur(10px) saturate(1.4);
+}
+
+nav a{
+  display:inline-block;
+  margin:6px;
+  padding:11px 19px;
+  border-radius:999px;
+  background:#eef4ee;
+  color:var(--pine-deep);
+  text-decoration:none;
+  font-weight:800;
+  transition:.25s ease;
+}
+
+nav a:hover, nav a:active{
+  background:var(--pine);
+  color:var(--gold-bright);
+  transform:translateY(-2px);
+}
+
+.container{
+  max-width:520px;
+  margin:0 auto;
+  padding:38px 20px;
+  position:relative;
+  z-index:1;
+}
+
+.card{
+  background:#fffdf7;
+  border:1px solid #e6d8bf;
+  border-radius:var(--r-lg);
+  padding:26px;
+  margin-bottom:22px;
+  box-shadow:var(--shadow-soft);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--pine), var(--gold), var(--pine));
+}
+
+.card h2{
+  margin-top:0;
+  font-family:var(--serif);
+  font-size:20px;
+  font-weight:900;
+  color:var(--pine-deep);
+}
+
+.badge{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:var(--gold-bright);
+  background:var(--pine);
+  padding:5px 12px;
+  border-radius:999px;
+  margin-bottom:14px;
+}
+
+.intro{
+  font-size:14px;
+  color:var(--text-soft);
+  line-height:1.7;
+  margin:0 0 4px;
+}
+
+.name-row{ display:flex; gap:8px; margin-bottom:12px; }
+
+.name-row input{
+  flex:1;
+  border:1px solid #ddcdb2;
+  border-radius:10px;
+  padding:11px 12px;
+  font-size:15px;
+  font-family:var(--sans);
+  background:#fffdf9;
+  color:var(--text);
+}
+
+.name-row input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+
+.name-row button{
+  border:none;
+  background:var(--pine);
+  color:var(--gold-bright);
+  font-weight:800;
+  font-size:14px;
+  border-radius:10px;
+  padding:0 16px;
+  cursor:pointer;
+}
+
+.name-row button:hover{ background:var(--pine-deep); }
+
+.chips{ display:flex; flex-wrap:wrap; gap:8px; min-height:34px; }
+
+.chip{
+  display:flex; align-items:center; gap:6px;
+  background:rgba(205,168,106,.18);
+  border:1px solid var(--gold);
+  color:var(--pine-deep);
+  font-weight:700;
+  font-size:13px;
+  padding:6px 8px 6px 12px;
+  border-radius:999px;
+}
+
+.chip button{
+  border:none; background:none; cursor:pointer;
+  color:var(--crimson); font-weight:900; font-size:14px;
+  line-height:1; padding:2px;
+}
+
+.hint{ font-size:12px; color:var(--text-soft); margin-top:8px; }
+
+.wheel-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 16px 22px;
+}
+
+.wheel-stage{
+  position:relative;
+  width:280px;
+  height:280px;
+}
+
+.wheel-spinner{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+}
+
+.wheel-spinner svg{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  box-shadow:0 14px 34px rgba(0,0,0,.28), 0 0 0 6px var(--pine-deep), 0 0 0 9px var(--gold);
+}
+
+.bottle-pivot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  z-index:5;
+  transition:transform 4.2s cubic-bezier(.12,.72,.15,1);
+}
+
+.bottle-img{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:52px;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.4));
+  pointer-events:none;
+}
+
+.spin-btn{
+  margin-top:24px;
+  width:100%;
+  border:none;
+  border-radius:999px;
+  padding:15px;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:17px;
+  letter-spacing:.5px;
+  color:var(--gold-bright);
+  background:linear-gradient(160deg,var(--pine-light),var(--pine-deep));
+  box-shadow:0 10px 22px rgba(5,20,14,.28), 0 0 0 2px rgba(205,168,106,.4);
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.spin-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.spin-btn:not(:disabled):hover{ transform:translateY(-2px); }
+.spin-btn:not(:disabled):active{ transform:scale(.98); }
+
+.result{
+  margin-top:18px;
+  text-align:center;
+  border:2px double var(--crimson);
+  border-radius:14px;
+  padding:16px;
+  background:#fffaf1;
+  display:none;
+  width:100%;
+}
+
+.result.show{ display:block; animation:pop .35s cubic-bezier(.2,1.5,.4,1); }
+
+@keyframes pop{
+  0%{ transform:scale(.85); opacity:0; }
+  100%{ transform:scale(1); opacity:1; }
+}
+
+.result .label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--crimson);
+  font-weight:700;
+}
+
+.result .winner{
+  font-family:var(--serif);
+  font-size:26px;
+  font-weight:900;
+  color:var(--pine-deep);
+  margin:6px 0 4px;
+}
+
+.result .penalty{
+  font-size:14px;
+  font-weight:700;
+  color:var(--crimson);
+}
+
+.back-button{
+  display:inline-block;
+  margin-top:6px;
+  padding:12px 20px;
+  background:var(--pine);
+  color:var(--gold-bright);
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:800;
+  transition:.2s ease;
+}
+
+.back-button:hover{ background:var(--pine-deep); transform:translateY(-2px); }
+
+@media(max-width:600px){
+  header h1{ font-size:30px; }
+  .card{ padding:20px; }
+  .wheel-stage{ width:250px; height:250px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="seal-wrap">
+    <span class="seal-ring"></span>
+    <img class="logo" src="./KakaoTalk_20260520_101819009.png">
+  </div>
+  <h1>협회 술자리 돌림판</h1>
+  <p>매주술권장협회 공식 내기 도구</p>
+</header>
+
+<nav>
+  <a href="./index.html">협회 홈페이지</a>
+</nav>
+
+<div class="container">
+
+  <div class="card">
+    <span class="badge">협회 공식 미니게임</span>
+    <h2>오늘의 내기, 소주병에게 맡기세요</h2>
+    <p class="intro">참석자를 입력하면 그 수에 맞춰 원판이 자동으로 나뉩니다. 병을 돌려서 멈춘 사람이 오늘의 담당자입니다.</p>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px;">참석자 입력 (2명 이상)</h2>
+    <div class="name-row">
+      <input id="nameInput" type="text" placeholder="이름 입력 후 추가" maxlength="8">
+      <button onclick="addName()">추가</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <p class="hint">최소 2명, 최대 10명까지 넣을 수 있어요.</p>
+  </div>
+
+  <div class="card wheel-area">
+    <div class="wheel-stage">
+      <div class="wheel-spinner" id="wheelSpinner">
+        <svg viewBox="0 0 300 300" id="wheelSvg"></svg>
+      </div>
+      <div class="bottle-pivot" id="bottlePivot">
+        <img class="bottle-img" src="./돌림판_소주병.png" alt="소주병">
+      </div>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spin()" disabled>돌려서 정하기</button>
+
+    <div class="result" id="result">
+      <div class="label">협회 공식 발표</div>
+      <div class="winner" id="winnerName"></div>
+      <div class="penalty" id="winnerPenalty"></div>
+    </div>
+  </div>
+
+  <a class="back-button" href="./index.html">← 협회 홈페이지로 돌아가기</a>
+
+</div>
+
+<script>
+let names = [];
+let currentRotation = 0;
+let spinning = false;
+
+const colors = ["#0b3d2b", "#cda86a", "#155a3d", "#e2c48a", "#04150e", "#dcb877"];
+
+const penalties = [
+  "오늘 계산 담당",
+  "음~ 맛있게 잘 먹을게~",
+  "밑잔 즉시 탐지 대상",
+  "이번 라운드 안주 주문 담당",
+  "다음 소맥 제조 담당",
+  "협회칙 낭독 담당",
+  "이번 잔 원샷",
+  "노래방 예약 담당",
+  "다음 장소 예약 담당",
+  "사진 기록 담당"
+];
+
+function addName(){
+  const input = document.getElementById('nameInput');
+  const val = input.value.trim();
+  if(!val) return;
+  if(names.length >= 10){ input.value=''; return; }
+  names.push(val);
+  input.value = '';
+  input.focus();
+  renderChips();
+  renderWheel();
+}
+
+function removeName(idx){
+  names.splice(idx,1);
+  renderChips();
+  renderWheel();
+}
+
+function renderChips(){
+  const chips = document.getElementById('chips');
+  chips.innerHTML = names.map((n,i) =>
+    `<span class="chip">${n}<button onclick="removeName(${i})">×</button></span>`
+  ).join('');
+  document.getElementById('spinBtn').disabled = names.length < 2 || spinning;
+}
+
+function polar(cx,cy,r,angleDeg){
+  const rad = (angleDeg - 90) * Math.PI / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+function renderWheel(){
+  const svg = document.getElementById('wheelSvg');
+  const n = names.length;
+  if(n === 0){ svg.innerHTML = ''; return; }
+
+  const cx = 150, cy = 150, r = 148;
+  const segAngle = 360 / n;
+  let html = '';
+
+  for(let i=0; i<n; i++){
+    const start = i * segAngle;
+    const end = (i+1) * segAngle;
+    const p1 = polar(cx,cy,r,start);
+    const p2 = polar(cx,cy,r,end);
+    const largeArc = segAngle > 180 ? 1 : 0;
+    const color = colors[i % colors.length];
+
+    html += `<path d="M ${cx} ${cy} L ${p1.x} ${p1.y} A ${r} ${r} 0 ${largeArc} 1 ${p2.x} ${p2.y} Z" fill="${color}" stroke="#fffdf7" stroke-width="2"/>`;
+
+    const mid = start + segAngle/2;
+    const labelPos = polar(cx,cy,r*0.62,mid);
+    let rot = mid;
+    let flip = 0;
+    if(mid > 90 && mid < 270){ flip = 180; }
+
+    html += `<text x="${labelPos.x}" y="${labelPos.y}" fill="#fffdf7" font-family="Noto Serif KR, serif" font-weight="900" font-size="15" text-anchor="middle" transform="rotate(${rot + flip}, ${labelPos.x}, ${labelPos.y})">${escapeXml(names[i])}</text>`;
+  }
+
+  svg.innerHTML = html;
+}
+
+function escapeXml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function spin(){
+  if(spinning || names.length < 2) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('result').classList.remove('show');
+
+  const n = names.length;
+  const segAngle = 360 / n;
+  const winnerIdx = Math.floor(Math.random() * n);
+  const winnerMid = winnerIdx * segAngle + segAngle / 2;
+  const margin = Math.min(segAngle * 0.3, 12);
+  const jitter = (Math.random() - 0.5) * 2 * margin;
+
+  const fullSpins = 5 + Math.floor(Math.random() * 3);
+  const targetMod = ((winnerMid + jitter) % 360 + 360) % 360;
+
+  const prevMod = ((currentRotation % 360) + 360) % 360;
+  let delta = targetMod - prevMod;
+  if(delta < 0) delta += 360;
+
+  currentRotation += fullSpins * 360 + delta;
+
+  const bottle = document.getElementById('bottlePivot');
+  bottle.style.transform = `rotate(${currentRotation}deg)`;
+
+  setTimeout(() => {
+    spinning = false;
+    document.getElementById('spinBtn').disabled = names.length < 2;
+    document.getElementById('winnerName').textContent = names[winnerIdx] + " 당첨";
+    document.getElementById('winnerPenalty').textContent = penalties[Math.floor(Math.random()*penalties.length)];
+    document.getElementById('result').classList.add('show');
+  }, 4300);
+}
+
+renderChips();
+renderWheel();
+</script>
+
+</body>
+</html>
