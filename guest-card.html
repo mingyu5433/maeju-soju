@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임시회원증 발급 | 매주술권장협회</title>
+
+<style>
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --ink:#081d15;
+  --pine:#0b3d2b;
+  --pine-deep:#04150e;
+  --pine-light:#155a3d;
+  --gold:#cda86a;
+  --gold-bright:#f2dd9c;
+  --silver:#a9a290;
+  --silver-bright:#d8d2c1;
+  --paper:#f6efdf;
+  --text:#1c2b22;
+  --text-soft:#5a6a5f;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Pretendard','Noto Sans KR',Arial,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:
+    radial-gradient(circle at 15% -10%, rgba(205,168,106,.16), transparent 40%),
+    var(--paper);
+  color:var(--text);
+  position:relative;
+}
+
+header{
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
+    linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
+  color:#fdf8ea;
+  text-align:center;
+  padding:50px 20px 36px;
+  border-bottom:6px solid var(--gold);
+}
+
+header h1{
+  margin:0 0 8px;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:32px;
+  color:#fdf8ea;
+}
+
+header p{
+  margin:0;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:var(--gold-bright);
+  text-transform:uppercase;
+}
+
+nav{
+  background:rgba(255,253,247,.85);
+  padding:16px 10px;
+  text-align:center;
+  border-bottom:1px solid #ddcdb2;
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(10px) saturate(1.4);
+}
+
+nav a{
+  display:inline-block;
+  position:relative;
+  margin:5px 14px;
+  padding:8px 2px;
+  color:var(--pine-deep);
+  text-decoration:none;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:50%; right:50%;
+  bottom:0;
+  height:1.5px;
+  background:var(--gold);
+  transition:left .3s ease, right .3s ease;
+}
+
+nav a:hover::after{ left:0; right:0; }
+
+.container{
+  max-width:460px;
+  margin:0 auto;
+  padding:38px 20px 60px;
+}
+
+.card{
+  background:#fffdf7;
+  border:1px solid #e6d8bf;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:22px;
+  box-shadow:0 10px 26px rgba(5,20,14,.10);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,var(--pine),var(--gold),var(--pine));
+}
+
+.card h2{
+  font-family:var(--serif);
+  font-size:17px;
+  margin:0 0 16px;
+  color:var(--pine-deep);
+}
+
+.field{ margin-bottom:16px; }
+
+.field label{
+  display:block;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text-soft);
+  margin-bottom:6px;
+}
+
+.field input[type="text"]{
+  width:100%;
+  border:1px solid #ddcdb2;
+  border-radius:8px;
+  padding:11px 12px;
+  font-size:15px;
+  font-family:var(--sans);
+  background:#fffdf9;
+  color:var(--text);
+}
+
+.field input[type="text"]:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+
+.photo-drop{
+  border:1.5px dashed #ddcdb2;
+  border-radius:10px;
+  padding:16px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s ease;
+  background:#fffdf9;
+  display:block;
+}
+
+.photo-drop:hover{ border-color:var(--gold); }
+
+.photo-drop span{
+  display:block;
+  font-size:13px;
+  color:var(--text-soft);
+}
+
+.photo-drop input{ display:none; }
+
+.gen-btn{
+  width:100%;
+  border:1.5px solid var(--gold);
+  border-radius:4px;
+  padding:14px;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:15px;
+  letter-spacing:1px;
+  color:var(--gold-bright);
+  background:var(--pine-deep);
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.gen-btn:hover{ background:var(--pine); }
+
+.result-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:8px 6px 26px;
+}
+
+.guest-card{
+  width:100%;
+  max-width:340px;
+  border-radius:18px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:#28401f;
+  position:relative;
+  overflow:hidden;
+  box-sizing:border-box;
+  background:linear-gradient(160deg,#eef8dd,#dcefc0);
+  border:3px solid #b7cf8f;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+}
+
+.guest-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 35%, rgba(255,255,255,.35) 48%, rgba(255,255,255,.55) 50%, rgba(255,255,255,.35) 52%, transparent 65%);
+  background-size:250% 250%;
+  animation:guestSheen 6s ease-in-out infinite;
+  pointer-events:none;
+  mix-blend-mode:soft-light;
+}
+
+@keyframes guestSheen{
+  0%,100%{ background-position:0% 0%; }
+  50%{ background-position:100% 100%; }
+}
+
+.gc-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-family:var(--mono);
+  gap:6px;
+}
+
+.gc-type{
+  font-size:9px;
+  letter-spacing:1px;
+  background:rgba(255,255,255,.5);
+  border:1px solid #7f9a5a;
+  color:#33501f;
+  padding:2px 8px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+.gc-name{
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:16px;
+  color:#213619;
+  flex:1;
+  text-align:center;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  padding:0 6px;
+}
+
+.gc-hp{
+  font-size:9.5px;
+  color:#3d5a2a;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.gc-hp b{ font-size:12px; color:#213619; }
+
+.gc-photo{
+  width:100%;
+  aspect-ratio:1.4;
+  border-radius:10px;
+  overflow:hidden;
+  border:2px solid #7f9a5a;
+  background:radial-gradient(circle at 50% 40%, #1c4531, #081b12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.gc-photo img{ width:100%; height:100%; object-fit:cover; display:none; }
+
+.gc-photo .placeholder{
+  font-family:var(--mono);
+  font-size:11px;
+  color:rgba(244,236,216,.5);
+  text-align:center;
+  padding:20px;
+}
+
+.gc-caption{
+  font-size:9px;
+  color:#4f6a3b;
+  margin:0;
+}
+
+.gc-skill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border-top:1px solid rgba(40,64,31,.3);
+  border-bottom:1px solid rgba(40,64,31,.3);
+  padding:5px 0;
+}
+
+.gc-skill-icon{ font-size:15px; }
+.gc-skill-name{ flex:1; font-weight:800; font-size:12px; color:#213619; }
+.gc-skill-power{ font-family:var(--mono); font-weight:700; color:#33501f; font-size:12px; }
+
+.gc-skill-desc{
+  font-size:10.5px;
+  line-height:1.6;
+  color:#3d5228;
+  margin:0;
+}
+
+.gc-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:4px;
+  font-size:8.5px;
+  color:#5a6e46;
+  font-family:var(--mono);
+}
+
+.gc-footer{
+  text-align:center;
+  font-size:9px;
+  letter-spacing:1px;
+  color:#33501f;
+  font-family:var(--mono);
+  border-top:1px dashed rgba(40,64,31,.35);
+  padding-top:6px;
+}
+
+.dl-btn{
+  margin-top:18px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--pine-deep);
+  padding:11px 22px;
+  border-radius:3px;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.dl-btn:hover{ background:var(--pine-deep); color:var(--gold-bright); border-color:var(--gold-bright); }
+
+.dl-btn:disabled{ opacity:.4; cursor:not-allowed; }
+
+.hint{ font-size:12px; color:var(--text-soft); margin-top:6px; text-align:center; }
+
+.notice-box{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed #ddcdb2;
+  text-align:center;
+}
+
+.notice-label{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:var(--pine-deep);
+  border:1px solid var(--gold);
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:10px;
+}
+
+.notice-box p{
+  font-size:11.5px;
+  line-height:1.7;
+  color:var(--text-soft);
+  margin:6px 0;
+}
+
+.back-button{
+  display:inline-block;
+  margin-top:6px;
+  padding:12px 22px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--pine-deep);
+  border-radius:3px;
+  text-decoration:none;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:1px;
+  transition:.2s ease;
+}
+
+.back-button:hover{ background:var(--pine-deep); color:var(--gold-bright); border-color:var(--gold-bright); }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>임시회원증 발급</h1>
+  <p>매주술권장협회 비공식 게스트 인증</p>
+</header>
+
+<nav>
+  <a href="./index.html">협회 홈페이지</a>
+</nav>
+
+<div class="container">
+
+  <div class="card">
+    <h2>발급 정보 입력</h2>
+
+    <div class="field">
+      <label for="guestName">이름</label>
+      <input type="text" id="guestName" placeholder="이름을 입력하세요" maxlength="10">
+    </div>
+
+    <div class="field">
+      <label for="guestSkill">한마디 / 특징</label>
+      <input type="text" id="guestSkill" placeholder="예: 오늘 처음 합류한 게스트" maxlength="16">
+    </div>
+
+    <div class="field">
+      <label>사진</label>
+      <label class="photo-drop" id="photoDrop">
+        <span id="photoDropLabel">탭하여 사진 선택</span>
+        <input type="file" id="photoInput" accept="image/*">
+      </label>
+    </div>
+
+    <button class="gen-btn" onclick="generateCard()">임시회원증 발급하기</button>
+  </div>
+
+  <div class="card result-wrap" id="resultWrap" style="display:none;">
+    <div class="guest-card" id="guestCard">
+      <div class="gc-top">
+        <span class="gc-type">임시회원</span>
+        <span class="gc-name" id="gcName">이름</span>
+        <span class="gc-hp">주량<b>측정불가</b></span>
+      </div>
+      <div class="gc-photo" id="gcPhotoBox">
+        <span class="placeholder" id="gcPlaceholder">사진 미등록</span>
+        <img id="gcPhotoImg" alt="회원 사진">
+      </div>
+      <p class="gc-caption">매주술권장협회 비공식 게스트</p>
+      <div class="gc-skill">
+        <span class="gc-skill-icon">🍶</span>
+        <span class="gc-skill-name" id="gcSkillName">임시회원</span>
+        <span class="gc-skill-power" id="gcSkillPower">0</span>
+      </div>
+      <p class="gc-skill-desc">매주술권장협회 임원진의 만장일치 결의에 따라<br>금일 임시회원 자격을 인정하고 이를 발급한다.</p>
+      <div class="gc-bottom">
+        <span>약점 ???</span>
+        <span>탈출비용 🌱</span>
+      </div>
+      <div class="gc-footer">협회 공식 발행 · No.<span id="gcNo"></span></div>
+    </div>
+
+    <button class="dl-btn" id="downloadBtn" onclick="downloadCard()">이미지로 저장</button>
+    <p class="hint">저장한 이미지를 카톡이나 갤러리에 바로 공유할 수 있어요.</p>
+
+    <div class="notice-box">
+      <span class="notice-label">협회 공지</span>
+      <p>임시회원증이 누적 7회 이상<br>발급된 자에 한하여,<br>정식 협회 임원진<br>심사 대상 자격이 부여된다.</p>
+      <p>발급 횟수를 임의로 조작한 사실이 확인될 경우,<br>협회칙에 따라 즉결 처형에 처한다.</p>
+    </div>
+  </div>
+
+  <a class="back-button" href="./index.html">← 협회 홈페이지로 돌아가기</a>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+
+const photoInput = document.getElementById('photoInput');
+const photoDropLabel = document.getElementById('photoDropLabel');
+let photoDataUrl = null;
+
+photoInput.addEventListener('change', function () {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    photoDataUrl = e.target.result;
+    photoDropLabel.textContent = file.name + ' 선택됨';
+  };
+  reader.readAsDataURL(file);
+});
+
+function formatDateCode(d){
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return m + day;
+}
+
+function generateCard(){
+  const name = document.getElementById('guestName').value.trim();
+  if (!name) {
+    alert('이름을 입력해주세요.');
+    return;
+  }
+  const skillText = document.getElementById('guestSkill').value.trim() || '임시회원';
+
+  document.getElementById('gcName').textContent = name;
+  document.getElementById('gcSkillName').textContent = skillText;
+  document.getElementById('gcSkillPower').textContent = Math.floor(Math.random() * 50) + 1;
+  document.getElementById('gcNo').textContent = formatDateCode(new Date());
+
+  const img = document.getElementById('gcPhotoImg');
+  const placeholder = document.getElementById('gcPlaceholder');
+  if (photoDataUrl) {
+    img.src = photoDataUrl;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    placeholder.style.display = 'block';
+  }
+
+  document.getElementById('resultWrap').style.display = 'flex';
+  document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function downloadCard(){
+  const btn = document.getElementById('downloadBtn');
+  btn.disabled = true;
+  btn.textContent = '저장 중...';
+
+  html2canvas(document.getElementById('guestCard'), { backgroundColor: null, scale: 2 }).then(function (canvas) {
+    const link = document.createElement('a');
+    link.download = '매주술권장협회_임시회원증.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.disabled = false;
+    btn.textContent = '이미지로 저장';
+  }).catch(function () {
+    btn.disabled = false;
+    btn.textContent = '이미지로 저장';
+    alert('이미지 저장에 실패했습니다. 다시 시도해주세요.');
+  });
+}
+
+</script>
+
+</body>
+</html>
