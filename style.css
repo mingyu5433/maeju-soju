@@ -1428,3 +1428,10 @@ footer{
 .article-page .container{
   max-width:760px;
 }
+
+/* 뉴스 기사 개별 페이지는 스크롤 감지 스크립트가 없으므로
+   .card가 항상 즉시 보이도록 강제 (index.html의 페이드인 효과 무효화) */
+.article-page .card{
+  opacity:1 !important;
+  transform:none !important;
+}
