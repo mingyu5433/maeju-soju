@@ -71,10 +71,18 @@ header{
 
 .seal-ring{
   position:absolute;
-  inset:-9px;
+  inset:-8px;
   border-radius:50%;
-  border:2px dashed rgba(242,221,156,.55);
-  animation:sealSpin 22s linear infinite;
+  background:conic-gradient(from 0deg,
+    transparent 0%,
+    rgba(242,221,156,.15) 6%,
+    rgba(242,221,156,.95) 11%,
+    rgba(242,221,156,.15) 16%,
+    transparent 24%,
+    transparent 100%);
+  -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  mask:radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  animation:sealSpin 4s linear infinite;
 }
 
 @keyframes sealSpin{ to{ transform:rotate(360deg); } }
