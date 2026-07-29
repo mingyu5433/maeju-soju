@@ -13,7 +13,7 @@
 
 <body>
 
-<header>
+<header class="intro-header">
   <div class="header-inner">
     <div class="header-text">
       <h1>매주술권장협회</h1>
@@ -641,6 +641,68 @@ mingyu5433@gmail.com
   
 
 <script>
+
+function playIntro(){
+  var header = document.querySelector('header.intro-header');
+  if (!header) return;
+  var glassL = header.querySelector('.intro-glass-left');
+  var glassR = header.querySelector('.intro-glass-right');
+  var flash = header.querySelector('.intro-flash');
+  var sealReveal = header.querySelector('.seal-reveal');
+  var h1 = header.querySelector('h1');
+  var p = header.querySelector('p');
+  var line = header.querySelector('.header-line');
+  if (!glassL || !glassR || !flash || !sealReveal || !h1 || !p || !line) return;
+
+  setTimeout(function(){
+    glassL.style.transition = 'transform 1.0s cubic-bezier(.3,.7,.3,1)';
+    glassR.style.transition = 'transform 1.0s cubic-bezier(.3,.7,.3,1)';
+    glassL.style.transform = 'translateX(0px)';
+    glassR.style.transform = 'translateX(0px)';
+  }, 50);
+
+  setTimeout(function(){
+    flash.style.transition = 'opacity .25s ease';
+    flash.style.opacity = '.85';
+  }, 1050);
+
+  setTimeout(function(){
+    glassL.style.transition = 'opacity .3s ease';
+    glassR.style.transition = 'opacity .3s ease';
+    glassL.style.opacity = '0';
+    glassR.style.opacity = '0';
+    flash.style.transition = 'opacity .5s ease, width .5s ease, height .5s ease, margin .5s ease';
+    flash.style.width = '340px';
+    flash.style.height = '340px';
+    flash.style.marginLeft = '-170px';
+    flash.style.marginTop = '-170px';
+    flash.style.opacity = '.7';
+  }, 1200);
+
+  setTimeout(function(){
+    flash.style.transition = 'opacity .4s ease';
+    flash.style.opacity = '0';
+    sealReveal.style.transition = 'opacity .4s ease, transform .4s ease';
+    sealReveal.style.opacity = '1';
+    sealReveal.style.transform = 'scale(1)';
+  }, 1650);
+
+  setTimeout(function(){
+    h1.style.transition = 'opacity .5s ease';
+    p.style.transition = 'opacity .5s ease';
+    h1.style.opacity = '1';
+    p.style.opacity = '1';
+    header.style.transition = 'transform .8s cubic-bezier(.4,0,.2,1)';
+    header.style.transform = 'scale(1)';
+  }, 1850);
+
+  setTimeout(function(){
+    line.style.transition = 'width 1s ease';
+    line.style.width = '90px';
+  }, 2200);
+}
+
+document.addEventListener('DOMContentLoaded', playIntro);
 
 function openModal(id) {
   var m = document.getElementById(id);
