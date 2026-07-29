@@ -654,6 +654,14 @@ function playIntro(){
   var line = header.querySelector('.header-line');
   if (!glassL || !glassR || !flash || !sealReveal || !h1 || !p || !line) return;
 
+  var rect = header.getBoundingClientRect();
+  var vw = window.innerWidth;
+  var vh = window.innerHeight;
+  var fillScale = Math.max(vw / rect.width, vh / rect.height) * 1.1;
+  if (!isFinite(fillScale) || fillScale < 1) fillScale = 1;
+  header.style.transformOrigin = '50% 0%';
+  header.style.transform = 'scale(' + fillScale.toFixed(3) + ')';
+
   setTimeout(function(){
     glassL.style.transition = 'transform 1.0s cubic-bezier(.3,.7,.3,1)';
     glassR.style.transition = 'transform 1.0s cubic-bezier(.3,.7,.3,1)';
