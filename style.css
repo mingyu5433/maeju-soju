@@ -364,10 +364,11 @@ nav a.active::after{
 
 .members-issue-btn{
   border:1px solid var(--gold);
-  background:transparent;
+  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  box-shadow:0 3px 10px rgba(5,20,14,.08);
   color:var(--pine-deep);
   padding:9px 18px;
-  border-radius:3px;
+  border-radius:8px;
   font-family:var(--serif);
   font-weight:700;
   font-size:12.5px;
@@ -381,6 +382,7 @@ nav a.active::after{
   background:var(--pine-deep);
   color:var(--gold-bright);
   border-color:var(--gold-bright);
+  box-shadow:0 8px 20px rgba(5,20,14,.22);
 }
 
 .hero{
@@ -414,6 +416,8 @@ ul{
   line-height:2;
   font-size:16px;
 }
+
+.mobile-break{ display:none; }
 
 .members{
   display:grid;
@@ -781,6 +785,7 @@ footer{
   .hero h2{font-size:30px;}
   .members{grid-template-columns:1fr;}
   .card{padding:24px;}
+  .mobile-break{ display:inline; }
   nav{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -1263,19 +1268,20 @@ footer{
 #rules::after{
   content:"협회칙 준수 서약";
   position:absolute;
-  top:26px;
-  right:-8px;
-  padding:9px 24px;
-  border:3px double var(--crimson);
-  color:var(--crimson);
+  top:-14px;
+  right:28px;
+  padding:8px 20px;
+  background:linear-gradient(160deg,var(--pine-light),var(--pine-deep));
+  border:1px solid var(--gold);
+  color:var(--gold-bright);
   font-family:var(--serif);
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:4px;
-  transform:rotate(-14deg);
-  opacity:.5;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:3px;
+  transform:rotate(-3deg);
+  box-shadow:0 8px 20px rgba(5,20,14,.28);
   pointer-events:none;
-  border-radius:6px;
+  border-radius:999px;
 }
 
 @media (max-width:600px) {
@@ -1283,7 +1289,7 @@ footer{
   .footer-links button { display:block; margin:0 0 12px 0; }
   .modal-content { width:calc(100% - 36px); max-height:78vh; padding:24px; }
   .news-card { min-width:260px; }
-  #rules::after{ font-size:10px; padding:6px 14px; top:14px; right:2px; letter-spacing:2px; }
+  #rules::after{ font-size:9px; padding:6px 14px; top:-11px; right:14px; letter-spacing:1.5px; }
 }
 
 .greeting-modal-content { max-width:920px; max-height:86vh; overflow-y:auto; }
