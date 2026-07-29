@@ -1496,6 +1496,11 @@ footer{
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
+  header{ animation:none !important; transform:none !important; }
+  header h1, header p{ animation:none !important; opacity:1 !important; transform:none !important; }
+  .header-line{ animation:none !important; width:90px !important; }
+  .seal-reveal{ animation:none !important; opacity:1 !important; transform:none !important; }
+  .intro-glass, .intro-flash{ display:none !important; }
 }
 
 /* 하위 페이지(뉴스 기사 등)에서 '홈페이지로 돌아가기' 버튼으로 사용 */
