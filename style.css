@@ -1346,6 +1346,13 @@ footer{
   font-size:15px;
   color:#222;
   font-weight:700;
+  word-break:keep-all;
+}
+
+.greeting-text ul li{
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 
 .greeting-photo-box { text-align:center; }
