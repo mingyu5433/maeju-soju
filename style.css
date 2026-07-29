@@ -129,7 +129,6 @@ header::after{
   width:100%;
   height:100%;
   perspective:900px;
-  animation:stampIn .7s cubic-bezier(.2,1.5,.4,1) both;
 }
 
 .badge-3d-inner{
@@ -183,11 +182,17 @@ header h1{
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  animation:shimmer 5s linear infinite;
+  overflow:hidden;
+  animation:headerRiseIn 1.1s cubic-bezier(.2,.9,.25,1) both, shimmer 5s linear infinite 1.1s;
 }
 
 @keyframes shimmer{
   to{ background-position:-220% center; }
+}
+
+@keyframes headerRiseIn{
+  from{ transform:translateY(140%); opacity:0; }
+  to{ transform:translateY(0); opacity:1; }
 }
 
 header p{
@@ -199,6 +204,20 @@ header p{
   color:var(--gold-bright);
   text-transform:uppercase;
   line-height:1.6;
+  overflow:hidden;
+  animation:headerRiseIn 1.1s cubic-bezier(.2,.9,.25,1) .15s both;
+}
+
+.header-line{
+  height:2px;
+  width:0;
+  background:var(--gold);
+  margin-top:12px;
+  animation:headerLineGrow 1s ease .55s forwards;
+}
+
+@keyframes headerLineGrow{
+  to{ width:90px; }
 }
 
 nav{
