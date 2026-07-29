@@ -21,13 +21,26 @@
       <div class="header-line"></div>
     </div>
     <div class="seal-wrap">
-      <span class="seal-ring"></span>
-      <div class="badge-3d" onclick="openModal('logoModal')" style="cursor:pointer;">
-        <div class="badge-3d-inner">
-          <div class="badge-face front"><img src="./협회로고.jpg" loading="eager"></div>
-          <div class="badge-face back"><img src="./협회로고.jpg" loading="eager"></div>
+      <div class="seal-reveal">
+        <span class="seal-ring"></span>
+        <div class="badge-3d" onclick="openModal('logoModal')" style="cursor:pointer;">
+          <div class="badge-3d-inner">
+            <div class="badge-face front"><img src="./협회로고.jpg" loading="eager"></div>
+            <div class="badge-face back"><img src="./협회로고.jpg" loading="eager"></div>
+          </div>
         </div>
       </div>
+      <svg class="intro-glass intro-glass-left" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
+        <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
+        <clipPath id="introClipL"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
+        <g clip-path="url(#introClipL)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
+      </svg>
+      <svg class="intro-glass intro-glass-right" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
+        <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
+        <clipPath id="introClipR"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
+        <g clip-path="url(#introClipR)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
+      </svg>
+      <div class="intro-flash" aria-hidden="true"></div>
     </div>
   </div>
 </header>
