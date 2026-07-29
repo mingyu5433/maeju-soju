@@ -251,9 +251,10 @@ nav a:hover, nav a:active{
   display:block;
   width:100%;
   border:1px solid var(--gold);
-  background:transparent;
+  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  box-shadow:0 3px 10px rgba(5,20,14,.08);
   padding:18px 20px;
-  border-radius:3px;
+  border-radius:8px;
   margin-bottom:12px;
   text-align:left;
   font-family:var(--serif);
@@ -268,6 +269,7 @@ nav a:hover, nav a:active{
   color:var(--gold-bright);
   transform:translateX(6px);
   border-color:var(--gold-bright);
+  box-shadow:0 8px 20px rgba(5,20,14,.22);
 }
 
 .memoir-list .ep-num{
