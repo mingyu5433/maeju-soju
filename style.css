@@ -72,13 +72,10 @@ header{
   overflow:hidden;
   z-index:1;
   transform-origin:50% 30%;
-  animation:headerZoomIn 2.4s cubic-bezier(.4,0,.2,1) both;
 }
 
-@keyframes headerZoomIn{
-  0%{ transform:scale(1.6); }
-  60%{ transform:scale(1.6); }
-  100%{ transform:scale(1); }
+header.intro-header{
+  transform:scale(1.6);
 }
 
 header::after{
@@ -137,14 +134,11 @@ header::after{
   width:100%;
   height:100%;
   transform-origin:50% 50%;
-  animation:introLogoReveal 2.4s ease forwards;
 }
 
-@keyframes introLogoReveal{
-  0%,58%{ opacity:0; transform:scale(.3); }
-  68%{ opacity:1; transform:scale(1.1); }
-  78%{ opacity:1; transform:scale(1); }
-  100%{ opacity:1; transform:scale(1); }
+.intro-header .seal-reveal{
+  opacity:0;
+  transform:scale(.3);
 }
 
 .intro-glass{
@@ -159,28 +153,14 @@ header::after{
   pointer-events:none;
 }
 
-.intro-glass-left{
-  animation:introGlassInLeft 2.4s cubic-bezier(.3,.7,.3,1) forwards;
+.intro-header .intro-glass-left{
+  transform:translateX(-95px);
+  opacity:1;
 }
 
-.intro-glass-right{
-  animation:introGlassInRight 2.4s cubic-bezier(.3,.7,.3,1) forwards;
-}
-
-@keyframes introGlassInLeft{
-  0%{ transform:translateX(-95px) rotate(0deg); opacity:1; }
-  40%{ transform:translateX(0px) rotate(-8deg); opacity:1; }
-  46%{ transform:translateX(3px) rotate(-4deg); opacity:1; }
-  54%{ opacity:0; }
-  100%{ opacity:0; }
-}
-
-@keyframes introGlassInRight{
-  0%{ transform:translateX(95px) rotate(0deg); opacity:1; }
-  40%{ transform:translateX(0px) rotate(8deg); opacity:1; }
-  46%{ transform:translateX(-3px) rotate(4deg); opacity:1; }
-  54%{ opacity:0; }
-  100%{ opacity:0; }
+.intro-header .intro-glass-right{
+  transform:translateX(95px);
+  opacity:1;
 }
 
 .intro-flash{
@@ -196,15 +176,6 @@ header::after{
   opacity:0;
   z-index:3;
   pointer-events:none;
-  animation:introFlashPop 2.4s ease forwards;
-}
-
-@keyframes introFlashPop{
-  0%,39%{ opacity:0; width:20px; height:20px; margin-left:-10px; margin-top:-10px; }
-  46%{ opacity:.85; width:20px; height:20px; margin-left:-10px; margin-top:-10px; }
-  62%{ opacity:.7; width:340px; height:340px; margin-left:-170px; margin-top:-170px; }
-  74%{ opacity:0; width:400px; height:400px; margin-left:-200px; margin-top:-200px; }
-  100%{ opacity:0; }
 }
 
 .badge-3d{
@@ -266,17 +237,14 @@ header h1{
   background-clip:text;
   color:transparent;
   overflow:hidden;
-  animation:headerRiseIn 2.4s ease both, shimmer 5s linear infinite 2.4s;
+  animation:shimmer 5s linear infinite;
 }
 
 @keyframes shimmer{
   to{ background-position:-220% center; }
 }
 
-@keyframes headerRiseIn{
-  0%,68%{ transform:translateY(10px); opacity:0; }
-  100%{ transform:translateY(0); opacity:1; }
-}
+.intro-header h1{ opacity:0; }
 
 header p{
   margin:0;
@@ -288,20 +256,18 @@ header p{
   text-transform:uppercase;
   line-height:1.6;
   overflow:hidden;
-  animation:headerRiseIn 2.4s ease both;
 }
+
+.intro-header p{ opacity:0; }
 
 .header-line{
   height:2px;
-  width:0;
+  width:90px;
   background:var(--gold);
   margin-top:12px;
-  animation:headerLineGrow 1s ease 2.1s forwards;
 }
 
-@keyframes headerLineGrow{
-  to{ width:90px; }
-}
+.intro-header .header-line{ width:0; }
 
 nav{
   background:rgba(255,253,247,.85);
@@ -523,7 +489,7 @@ ul{
 
 .members{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repe(3,1fr);
   align-items:stretch;
   gap:18px;
   margin-top:24px;
