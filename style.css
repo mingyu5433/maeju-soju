@@ -363,10 +363,10 @@ nav a.active::after{
 }
 
 .members-issue-btn{
-  border:1px solid var(--gold);
-  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  border:1px solid #b7cf8f;
+  background:linear-gradient(160deg,#eef8dd,#dcefc0);
   box-shadow:0 3px 10px rgba(5,20,14,.08);
-  color:var(--pine-deep);
+  color:#33501f;
   padding:9px 18px;
   border-radius:8px;
   font-family:var(--serif);
@@ -1268,8 +1268,8 @@ footer{
 #rules::after{
   content:"협회칙 준수 서약";
   position:absolute;
-  top:-14px;
-  right:28px;
+  top:22px;
+  right:24px;
   padding:8px 20px;
   background:linear-gradient(160deg,var(--pine-light),var(--pine-deep));
   border:1px solid var(--gold);
@@ -1289,7 +1289,7 @@ footer{
   .footer-links button { display:block; margin:0 0 12px 0; }
   .modal-content { width:calc(100% - 36px); max-height:78vh; padding:24px; }
   .news-card { min-width:260px; }
-  #rules::after{ font-size:9px; padding:6px 14px; top:-11px; right:14px; letter-spacing:1.5px; }
+  #rules::after{ font-size:9px; padding:6px 14px; top:16px; right:14px; letter-spacing:1.5px; }
 }
 
 .greeting-modal-content { max-width:920px; max-height:86vh; overflow-y:auto; }
