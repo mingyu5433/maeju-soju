@@ -654,10 +654,22 @@ function playIntro(){
   var line = header.querySelector('.header-line');
   if (!glassL || !glassR || !flash || !sealReveal || !h1 || !p || !line) return;
 
-  var rect = header.getBoundingClientRect();
+  var naturalRect = header.getBoundingClientRect();
+  var naturalHeight = naturalRect.height;
+  var naturalWidth = naturalRect.width;
+
+  document.body.style.paddingTop = naturalHeight + 'px';
+  document.body.style.overflow = 'hidden';
+
+  header.style.position = 'fixed';
+  header.style.top = '0';
+  header.style.left = '0';
+  header.style.width = '100%';
+  header.style.zIndex = '99999';
+
   var vw = window.innerWidth;
   var vh = window.innerHeight;
-  var fillScale = Math.max(vw / rect.width, vh / rect.height) * 1.1;
+  var fillScale = Math.max(vw / naturalWidth, vh / naturalHeight) * 1.1;
   if (!isFinite(fillScale) || fillScale < 1) fillScale = 1;
   header.style.transformOrigin = '50% 0%';
   header.style.transform = 'scale(' + fillScale.toFixed(3) + ')';
@@ -717,7 +729,14 @@ function playIntro(){
     glassR.style.display = 'none';
     flash.style.display = 'none';
     header.style.transition = 'none';
-    header.style.transform = 'scale(1)';
+    header.style.transform = 'none';
+    header.style.position = 'relative';
+    header.style.top = '';
+    header.style.left = '';
+    header.style.width = '';
+    header.style.zIndex = '';
+    document.body.style.paddingTop = '';
+    document.body.style.overflow = '';
     sealReveal.style.transition = 'none';
     sealReveal.style.opacity = '1';
     sealReveal.style.transform = 'scale(1)';
