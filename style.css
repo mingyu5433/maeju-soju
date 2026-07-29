@@ -1334,9 +1334,7 @@ footer{
 }
 
 .greeting-text ul li{
-  white-space:nowrap;
-  overflow-x:auto;
-  overflow-y:hidden;
+  overflow-wrap:normal;
 }
 
 .greeting-photo-box { text-align:center; }
