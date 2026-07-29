@@ -700,6 +700,26 @@ function playIntro(){
     line.style.transition = 'width 1s ease';
     line.style.width = '90px';
   }, 2200);
+
+  setTimeout(function(){
+    glassL.style.transition = 'none';
+    glassR.style.transition = 'none';
+    flash.style.transition = 'none';
+    glassL.style.display = 'none';
+    glassR.style.display = 'none';
+    flash.style.display = 'none';
+    header.style.transition = 'none';
+    header.style.transform = 'scale(1)';
+    sealReveal.style.transition = 'none';
+    sealReveal.style.opacity = '1';
+    sealReveal.style.transform = 'scale(1)';
+    h1.style.transition = 'none';
+    p.style.transition = 'none';
+    h1.style.opacity = '1';
+    p.style.opacity = '1';
+    line.style.transition = 'none';
+    line.style.width = '90px';
+  }, 2600);
 }
 
 document.addEventListener('DOMContentLoaded', playIntro);
