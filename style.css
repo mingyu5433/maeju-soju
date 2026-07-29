@@ -277,10 +277,11 @@ nav a.active::after{
   display:inline-flex;
   align-items:center;
   border:1px solid var(--gold);
-  background:transparent;
+  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  box-shadow:0 3px 10px rgba(5,20,14,.08);
   color:var(--pine-deep);
   padding:11px 20px;
-  border-radius:3px;
+  border-radius:8px;
   font-family:var(--serif);
   font-weight:700;
   font-size:12.5px;
@@ -294,6 +295,7 @@ nav a.active::after{
   background:var(--pine-deep);
   color:var(--gold-bright);
   border-color:var(--gold-bright);
+  box-shadow:0 8px 20px rgba(5,20,14,.22);
 }
 
 .utility-buttons button:active{ transform:scale(.97); }
