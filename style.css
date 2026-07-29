@@ -149,29 +149,8 @@ header::after{
   pointer-events:none;
 }
 
-.intro-header .intro-glass-left{
-  transform:translateX(-95px);
-  opacity:1;
-}
-
-.intro-header .intro-glass-right{
-  transform:translateX(95px);
-  opacity:1;
-}
-
-.intro-flash{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:20px;
-  height:20px;
-  margin-left:-10px;
-  margin-top:-10px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,253,240,.6) 0%, rgba(242,221,156,.4) 35%, rgba(242,221,156,0) 72%);
-  opacity:0;
-  z-index:3;
-  pointer-events:none;
+.intro-glass, .intro-flash{
+  display:none;
 }
 
 .badge-3d{
