@@ -132,27 +132,6 @@ header::after{
   transform-origin:50% 50%;
 }
 
-.intro-header .seal-reveal{
-  opacity:0;
-  transform:scale(.3);
-}
-
-.intro-glass{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:46px;
-  height:50px;
-  margin-top:-25px;
-  margin-left:-23px;
-  z-index:2;
-  pointer-events:none;
-}
-
-.intro-glass, .intro-flash{
-  display:none;
-}
-
 .badge-3d{
   position:relative;
   width:100%;
@@ -219,8 +198,6 @@ header h1{
   to{ background-position:-220% center; }
 }
 
-.intro-header h1{ opacity:0; }
-
 header p{
   margin:0;
   font-family:var(--mono);
@@ -233,16 +210,12 @@ header p{
   overflow:hidden;
 }
 
-.intro-header p{ opacity:0; }
-
 .header-line{
   height:2px;
   width:90px;
   background:var(--gold);
   margin-top:12px;
 }
-
-.intro-header .header-line{ width:0; }
 
 nav{
   background:rgba(255,253,247,.85);
@@ -1459,4 +1432,132 @@ footer{
 .article-page .card{
   opacity:1 !important;
   transform:none !important;
+}
+
+/* ============================================================
+   전체화면 인트로 오버레이 (독립적인 고정 레이어)
+   실제 헤더와는 완전히 분리되어 있어서, 헤더 레이아웃/스크롤과
+   전혀 상호작용하지 않음. 애니메이션은 순수 CSS로만 동작하며
+   자바스크립트는 안전장치(최후 강제 제거)로만 사용.
+   ============================================================ */
+#introOverlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:22px;
+  background:
+    radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
+    linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
+  pointer-events:none;
+  animation:introOverlayOut .6s ease 2.3s forwards;
+}
+
+@keyframes introOverlayOut{
+  to{ opacity:0; transform:scale(.94); }
+}
+
+#introOverlay .intro-badge{
+  position:relative;
+  width:130px;
+  height:130px;
+}
+
+#introOverlay .intro-badge img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+  border:6px solid var(--gold-bright);
+  box-shadow:0 14px 34px rgba(0,0,0,.35), 0 0 0 8px rgba(205,168,106,.12);
+  opacity:0;
+  transform:scale(.3);
+  animation:ovLogoIn .5s ease 1.55s forwards;
+}
+
+@keyframes ovLogoIn{
+  to{ opacity:1; transform:scale(1); }
+}
+
+#introOverlay .ov-glass{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:46px;
+  height:50px;
+  margin-top:-25px;
+  margin-left:-23px;
+}
+
+#introOverlay .ov-glass-left{
+  animation:ovGlassL 1.4s cubic-bezier(.3,.7,.3,1) forwards;
+}
+
+#introOverlay .ov-glass-right{
+  animation:ovGlassR 1.4s cubic-bezier(.3,.7,.3,1) forwards;
+}
+
+@keyframes ovGlassL{
+  0%{ transform:translateX(-95px) rotate(0deg); opacity:1; }
+  60%{ transform:translateX(0px) rotate(-8deg); opacity:1; }
+  85%{ opacity:0; }
+  100%{ opacity:0; }
+}
+
+@keyframes ovGlassR{
+  0%{ transform:translateX(95px) rotate(0deg); opacity:1; }
+  60%{ transform:translateX(0px) rotate(8deg); opacity:1; }
+  85%{ opacity:0; }
+  100%{ opacity:0; }
+}
+
+#introOverlay .ov-flash{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:20px;
+  height:20px;
+  margin-left:-10px;
+  margin-top:-10px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,253,240,.6) 0%, rgba(242,221,156,.4) 35%, rgba(242,221,156,0) 72%);
+  opacity:0;
+  animation:ovFlash .8s ease .85s forwards;
+}
+
+@keyframes ovFlash{
+  0%{ opacity:0; width:20px; height:20px; margin-left:-10px; margin-top:-10px; }
+  30%{ opacity:.85; width:20px; height:20px; margin-left:-10px; margin-top:-10px; }
+  100%{ opacity:0; width:260px; height:260px; margin-left:-130px; margin-top:-130px; }
+}
+
+#introOverlay .intro-title{
+  text-align:center;
+  opacity:0;
+  animation:ovTitleIn .5s ease 1.7s forwards;
+}
+
+@keyframes ovTitleIn{
+  to{ opacity:1; }
+}
+
+#introOverlay .intro-title h2{
+  margin:0 0 6px;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:26px;
+  color:#fdf3d8;
+}
+
+#introOverlay .intro-title p{
+  margin:0;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:1.5px;
+  color:var(--gold-bright);
+  text-transform:uppercase;
 }
