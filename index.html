@@ -13,7 +13,28 @@
 
 <body>
 
-<header class="intro-header">
+<div id="introOverlay" aria-hidden="true">
+  <div class="intro-badge">
+    <img src="./협회로고.jpg" loading="eager" alt="">
+  </div>
+  <svg class="ov-glass ov-glass-left" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
+    <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
+    <clipPath id="ovClipL"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
+    <g clip-path="url(#ovClipL)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
+  </svg>
+  <svg class="ov-glass ov-glass-right" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
+    <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
+    <clipPath id="ovClipR"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
+    <g clip-path="url(#ovClipR)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
+  </svg>
+  <div class="ov-flash"></div>
+  <div class="intro-title">
+    <h2>매주술권장협회</h2>
+    <p>Weekly Drinking Promotion Association</p>
+  </div>
+</div>
+
+<header>
   <div class="header-inner">
     <div class="header-text">
       <h1>매주술권장협회</h1>
@@ -30,17 +51,6 @@
           </div>
         </div>
       </div>
-      <svg class="intro-glass intro-glass-left" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
-        <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
-        <clipPath id="introClipL"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
-        <g clip-path="url(#introClipL)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
-      </svg>
-      <svg class="intro-glass intro-glass-right" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
-        <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
-        <clipPath id="introClipR"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
-        <g clip-path="url(#introClipR)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
-      </svg>
-      <div class="intro-flash" aria-hidden="true"></div>
     </div>
   </div>
 </header>
@@ -642,32 +652,12 @@ mingyu5433@gmail.com
 
 <script>
 
-function playIntro(){
-  var header = document.querySelector('header.intro-header');
-  if (!header) return;
-  var sealReveal = header.querySelector('.seal-reveal');
-  var h1 = header.querySelector('h1');
-  var p = header.querySelector('p');
-  var line = header.querySelector('.header-line');
-  if (!sealReveal || !h1 || !p || !line) return;
-
-  setTimeout(function(){
-    sealReveal.style.transition = 'opacity .6s ease, transform .6s ease';
-    sealReveal.style.opacity = '1';
-    sealReveal.style.transform = 'scale(1)';
-    h1.style.transition = 'opacity .6s ease';
-    p.style.transition = 'opacity .6s ease';
-    h1.style.opacity = '1';
-    p.style.opacity = '1';
-  }, 150);
-
-  setTimeout(function(){
-    line.style.transition = 'width .8s ease';
-    line.style.width = '90px';
-  }, 500);
+function hideIntroOverlaySafety(){
+  var overlay = document.getElementById('introOverlay');
+  if (!overlay) return;
+  overlay.style.display = 'none';
 }
-
-document.addEventListener('DOMContentLoaded', playIntro);
+setTimeout(hideIntroOverlaySafety, 3500);
 
 function openModal(id) {
   var m = document.getElementById(id);
