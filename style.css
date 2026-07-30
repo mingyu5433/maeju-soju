@@ -1518,7 +1518,7 @@ footer{
 
 #introOverlay .ov-flash{
   position:absolute;
-  top:50%;
+  top:calc(50% - 31px);
   left:50%;
   width:32px;
   height:32px;
