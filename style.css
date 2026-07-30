@@ -1504,14 +1504,14 @@ footer{
 
 @keyframes ovGlassL{
   0%{ transform:translateX(-210px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(-32px) rotate(20deg); opacity:1; }
+  60%{ transform:translateX(-46px) rotate(18deg); opacity:1; }
   85%{ opacity:0; }
   100%{ opacity:0; }
 }
 
 @keyframes ovGlassR{
   0%{ transform:translateX(210px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(32px) rotate(-20deg); opacity:1; }
+  60%{ transform:translateX(46px) rotate(-18deg); opacity:1; }
   85%{ opacity:0; }
   100%{ opacity:0; }
 }
