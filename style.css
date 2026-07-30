@@ -1491,6 +1491,7 @@ footer{
   height:72px;
   margin-top:-36px;
   margin-left:-33px;
+  transform-origin:50% 100%;
 }
 
 #introOverlay .ov-glass-left{
@@ -1502,15 +1503,15 @@ footer{
 }
 
 @keyframes ovGlassL{
-  0%{ transform:translateX(-190px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(-32px) rotate(-14deg); opacity:1; }
+  0%{ transform:translateX(-210px) rotate(0deg); opacity:1; }
+  60%{ transform:translateX(-58px) rotate(18deg); opacity:1; }
   85%{ opacity:0; }
   100%{ opacity:0; }
 }
 
 @keyframes ovGlassR{
-  0%{ transform:translateX(190px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(32px) rotate(14deg); opacity:1; }
+  0%{ transform:translateX(210px) rotate(0deg); opacity:1; }
+  60%{ transform:translateX(58px) rotate(-18deg); opacity:1; }
   85%{ opacity:0; }
   100%{ opacity:0; }
 }
