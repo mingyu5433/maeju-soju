@@ -1453,7 +1453,7 @@ footer{
     radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
     linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
   pointer-events:none;
-  animation:introOverlayOut .6s ease 1.9s forwards;
+  animation:introOverlayOut .6s ease 2.6s forwards;
 }
 
 @keyframes introOverlayOut{
@@ -1476,7 +1476,7 @@ footer{
   box-shadow:0 18px 44px rgba(0,0,0,.4), 0 0 0 10px rgba(205,168,106,.14);
   opacity:0;
   transform:scale(.3);
-  animation:ovLogoIn .45s ease .65s forwards;
+  animation:ovLogoIn .45s ease 1.3s forwards;
 }
 
 @keyframes ovLogoIn{
@@ -1539,7 +1539,7 @@ footer{
 #introOverlay .intro-title{
   text-align:center;
   opacity:0;
-  animation:ovTitleIn .45s ease .85s forwards;
+  animation:ovTitleIn .45s ease 1.55s forwards;
 }
 
 @keyframes ovTitleIn{
