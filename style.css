@@ -1434,6 +1434,39 @@ footer{
   transform:none !important;
 }
 
+/* 뉴스 기사 페이지 하단 이전/다음 기사 이동 */
+.article-nav{
+  display:flex;
+  gap:12px;
+  margin-top:24px;
+}
+
+.article-nav-link{
+  flex:1;
+  text-align:center;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--pine-deep);
+  text-decoration:none;
+  padding:13px 14px;
+  border-radius:3px;
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.5px;
+  transition:.2s ease;
+}
+
+.article-nav-link:hover{
+  background:var(--pine-deep);
+  color:var(--gold-bright);
+  border-color:var(--gold-bright);
+}
+
+@media(max-width:600px){
+  .article-nav{ flex-direction:column; }
+}
+
 /* ============================================================
    전체화면 인트로 오버레이 (독립적인 고정 레이어)
    실제 헤더와는 완전히 분리되어 있어서, 헤더 레이아웃/스크롤과
