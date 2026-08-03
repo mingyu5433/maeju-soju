@@ -1468,6 +1468,112 @@ footer{
 }
 
 /* ============================================================
+   벤토 그리드 (2026 트렌드): 협회 한눈에 보기 요약 블록 +
+   협회칙/인재상 카드형 격자
+   ============================================================ */
+.bento-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.bento-tile{
+  background:linear-gradient(160deg,#fbf6ea,#f3e9d2);
+  border:1px solid #e2d3b4;
+  border-radius:20px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.bento-tile:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-soft);
+  border-color:var(--gold);
+}
+
+.bento-tile .bento-num{
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:32px;
+  color:var(--pine-deep);
+  line-height:1;
+  margin-bottom:6px;
+}
+
+.bento-tile .bento-label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:1px;
+  color:var(--text-soft);
+  text-transform:uppercase;
+}
+
+.bento-tile.wide{ grid-column:span 2; }
+
+.bento-tile.dark{
+  background:linear-gradient(160deg,#0d3f2c,#0a2e20);
+  border-color:transparent;
+}
+
+.bento-tile.dark .bento-num{ color:#fdf3d8; }
+.bento-tile.dark .bento-label{ color:var(--gold-bright); }
+
+.bento-tile.link{ cursor:pointer; }
+
+.bento-tile .bento-news-title{
+  font-family:var(--serif);
+  font-weight:800;
+  font-size:16px;
+  margin-top:8px;
+  line-height:1.4;
+  color:var(--pine-deep);
+}
+
+.bento-rules, .bento-talent{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.bento-rule-card, .bento-talent-card{
+  background:#fffdf7;
+  border:1px solid #e6d8bf;
+  border-radius:18px;
+  padding:20px;
+  font-size:14.5px;
+  line-height:1.7;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.bento-rule-card:hover, .bento-talent-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-soft);
+  border-color:var(--gold);
+}
+
+.bento-icon{
+  font-size:22px;
+  margin-bottom:10px;
+  display:block;
+}
+
+@media(max-width:800px){
+  .bento-grid{ grid-template-columns:repeat(2,1fr); }
+  .bento-rules, .bento-talent{ grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:600px){
+  .bento-grid{ grid-template-columns:1fr 1fr; }
+  .bento-tile.wide{ grid-column:span 2; }
+  .bento-rules, .bento-talent{ grid-template-columns:1fr; }
+}
+
+/* ============================================================
    전체화면 인트로 오버레이 (독립적인 고정 레이어)
    실제 헤더와는 완전히 분리되어 있어서, 헤더 레이아웃/스크롤과
    전혀 상호작용하지 않음. 애니메이션은 순수 CSS로만 동작하며
