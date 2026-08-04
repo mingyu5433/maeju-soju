@@ -1517,6 +1517,21 @@ footer{
 .bento-tile.dark{
   background:linear-gradient(160deg,#0d3f2c,#0a2e20);
   border-color:transparent;
+  position:relative;
+  overflow:hidden;
+}
+
+.bento-tile.dark::after{
+  content:"WDPA";
+  position:absolute;
+  right:-8px;
+  bottom:-18px;
+  font-family:var(--mono);
+  font-weight:900;
+  font-size:56px;
+  letter-spacing:2px;
+  color:rgba(242,221,156,.09);
+  pointer-events:none;
 }
 
 .bento-tile.dark .bento-num{ color:#fdf3d8; }
