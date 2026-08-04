@@ -1598,6 +1598,44 @@ footer{
 }
 
 /* ============================================================
+   인사말 페이지: 약력/본문 구분
+   ============================================================ */
+.greeting-label{
+  display:block;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.greeting-career{
+  background:#fffaf1;
+  border:1px solid #ded2c1;
+  border-radius:16px;
+  padding:26px 28px;
+  margin-bottom:34px;
+}
+
+.greeting-career ul{
+  margin:0;
+  padding-left:18px;
+  line-height:1.9;
+  font-size:15px;
+  color:#222;
+  font-weight:700;
+  word-break:keep-all;
+}
+
+.greeting-divider{
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:0 0 30px;
+}
+
+/* ============================================================
    전체화면 인트로 오버레이 (독립적인 고정 레이어)
    실제 헤더와는 완전히 분리되어 있어서, 헤더 레이아웃/스크롤과
    전혀 상호작용하지 않음. 애니메이션은 순수 CSS로만 동작하며
