@@ -1353,7 +1353,11 @@ footer{
   overflow-wrap:normal;
 }
 
-.greeting-photo-box { text-align:center; }
+.greeting-photo-box {
+  text-align:center;
+  max-width:280px;
+  margin:0 auto 30px;
+}
 
 .greeting-photo-box img {
   width:100%;
@@ -1387,7 +1391,6 @@ footer{
 
 @media(max-width:700px) {
   .greeting-header { grid-template-columns:1fr; }
-  .greeting-photo-box { max-width:230px; margin:0 auto; }
 }
 
 .greeting-chairman-title{
