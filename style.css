@@ -1543,23 +1543,31 @@ footer{
 .bento-rule-card, .bento-talent-card{
   background:#fffdf7;
   border:1px solid #e6d8bf;
-  border-radius:18px;
+  border-radius:14px;
   padding:20px;
   font-size:14.5px;
   line-height:1.7;
-  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  color:var(--text);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
 .bento-rule-card:hover, .bento-talent-card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-2px);
   box-shadow:var(--shadow-soft);
   border-color:var(--gold);
 }
 
-.bento-icon{
-  font-size:22px;
-  margin-bottom:10px;
+.bento-tag{
   display:block;
+  font-family:var(--serif);
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:1.5px;
+  color:var(--gold);
+  margin-bottom:9px;
+  padding-bottom:8px;
+  border-bottom:1px solid #e6d8bf;
+  text-transform:uppercase;
 }
 
 @media(max-width:800px){
