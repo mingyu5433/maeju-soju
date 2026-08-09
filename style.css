@@ -1636,133 +1636,30 @@ footer{
 }
 
 /* ============================================================
-   전체화면 인트로 오버레이 (독립적인 고정 레이어)
-   실제 헤더와는 완전히 분리되어 있어서, 헤더 레이아웃/스크롤과
-   전혀 상호작용하지 않음. 애니메이션은 순수 CSS로만 동작하며
-   자바스크립트는 안전장치(최후 강제 제거)로만 사용.
+   전체화면 인트로 영상 오버레이
+   실제 헤더와는 완전히 분리된 고정 레이어. 영상 재생이 끝나면
+   자바스크립트가 opacity를 0으로 내리고 제거함.
    ============================================================ */
 #introOverlay{
   position:fixed;
   inset:0;
   z-index:99999;
+  background:#04150e;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:30px;
-  background:
-    radial-gradient(circle at 50% 0%, var(--pine-light), transparent 60%),
-    linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);
+  overflow:hidden;
+  transition:opacity .5s ease;
+}
+
+#introOverlay.intro-hide{
+  opacity:0;
   pointer-events:none;
-  animation:introOverlayOut .6s ease 2.6s forwards;
 }
 
-@keyframes introOverlayOut{
-  to{ opacity:0; transform:scale(.94); }
-}
-
-#introOverlay .intro-badge{
-  position:relative;
-  width:210px;
-  height:210px;
-}
-
-#introOverlay .intro-badge img{
+#introOverlay video{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
-  border-radius:50%;
-  border:8px solid var(--gold-bright);
-  box-shadow:0 18px 44px rgba(0,0,0,.4), 0 0 0 10px rgba(205,168,106,.14);
-  opacity:0;
-  transform:scale(.3);
-  animation:ovLogoIn .45s ease 1.3s forwards;
-}
-
-@keyframes ovLogoIn{
-  to{ opacity:1; transform:scale(1); }
-}
-
-#introOverlay .ov-glass{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:66px;
-  height:72px;
-  margin-top:-36px;
-  margin-left:-33px;
-  transform-origin:50% 100%;
-  will-change:transform;
-}
-
-#introOverlay .ov-glass-left{
-  animation:ovGlassL 1s cubic-bezier(.3,.7,.3,1) forwards;
-}
-
-#introOverlay .ov-glass-right{
-  animation:ovGlassR 1s cubic-bezier(.3,.7,.3,1) forwards;
-}
-
-@keyframes ovGlassL{
-  0%{ transform:translateX(-210px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(-46px) rotate(18deg); opacity:1; }
-  78%{ transform:translateX(-46px) rotate(18deg); opacity:1; }
-  100%{ transform:translateX(-46px) rotate(18deg); opacity:0; }
-}
-
-@keyframes ovGlassR{
-  0%{ transform:translateX(210px) rotate(0deg); opacity:1; }
-  60%{ transform:translateX(46px) rotate(-18deg); opacity:1; }
-  78%{ transform:translateX(46px) rotate(-18deg); opacity:1; }
-  100%{ transform:translateX(46px) rotate(-18deg); opacity:0; }
-}
-
-#introOverlay .ov-flash{
-  position:absolute;
-  top:calc(50% - 31px);
-  left:50%;
-  width:460px;
-  height:460px;
-  margin-left:-230px;
-  margin-top:-230px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,253,240,.6) 0%, rgba(242,221,156,.4) 35%, rgba(242,221,156,0) 72%);
-  opacity:0;
-  transform:scale(0.0696);
-  will-change:transform, opacity;
-  animation:ovFlash .7s ease .55s forwards;
-}
-
-@keyframes ovFlash{
-  0%{ opacity:0; transform:scale(0.0696); }
-  25%{ opacity:.9; transform:scale(0.0696); }
-  100%{ opacity:0; transform:scale(1); }
-}
-
-#introOverlay .intro-title{
-  text-align:center;
-  opacity:0;
-  animation:ovTitleIn .45s ease 1.55s forwards;
-}
-
-@keyframes ovTitleIn{
-  to{ opacity:1; }
-}
-
-#introOverlay .intro-title h2{
-  margin:0 0 8px;
-  font-family:var(--serif);
-  font-weight:900;
-  font-size:36px;
-  color:#fdf3d8;
-}
-
-#introOverlay .intro-title p{
-  margin:0;
-  font-family:var(--mono);
-  font-size:13px;
-  letter-spacing:1.8px;
-  color:var(--gold-bright);
-  text-transform:uppercase;
 }
