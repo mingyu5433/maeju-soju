@@ -8,30 +8,13 @@
 <meta name="theme-color" content="#07462f">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
-<link rel="stylesheet" href="./style.css?v=9">
+<link rel="stylesheet" href="./style.css?v=10">
 </head>
 
 <body>
 
 <div id="introOverlay" aria-hidden="true">
-  <div class="intro-badge">
-    <img src="./협회로고.jpg" loading="eager" alt="" onerror="this.style.display='none'">
-  </div>
-  <svg class="ov-glass ov-glass-left" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
-    <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
-    <clipPath id="ovClipL"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
-    <g clip-path="url(#ovClipL)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
-  </svg>
-  <svg class="ov-glass ov-glass-right" width="46" height="50" viewBox="0 0 52 56" aria-hidden="true">
-    <path d="M9 4 L43 4 L40 44 Q26 50 12 44 Z" fill="none" stroke="#f2dd9c" stroke-width="2.2"/>
-    <clipPath id="ovClipR"><path d="M11 6 L41 6 L38.5 43 Q26 48.5 13.5 43 Z"/></clipPath>
-    <g clip-path="url(#ovClipR)"><rect x="10" y="24" width="32" height="24" fill="#e9c98f" opacity=".88"/></g>
-  </svg>
-  <div class="ov-flash"></div>
-  <div class="intro-title">
-    <h2>매주술권장협회</h2>
-    <p>Weekly Drinking Promotion Association</p>
-  </div>
+  <video id="introVideo" src="./intro.mp4" autoplay muted playsinline webkit-playsinline preload="auto"></video>
 </div>
 
 <header>
@@ -671,12 +654,22 @@ mingyu5433@gmail.com
 
 <script>
 
-function hideIntroOverlaySafety(){
+function hideIntroOverlay(){
   var overlay = document.getElementById('introOverlay');
   if (!overlay) return;
-  overlay.style.display = 'none';
+  overlay.classList.add('intro-hide');
+  setTimeout(function(){
+    overlay.style.display = 'none';
+  }, 550);
 }
-setTimeout(hideIntroOverlaySafety, 3500);
+
+(function(){
+  var video = document.getElementById('introVideo');
+  if (!video) { hideIntroOverlay(); return; }
+  video.addEventListener('ended', hideIntroOverlay);
+  video.addEventListener('error', hideIntroOverlay);
+  setTimeout(hideIntroOverlay, 12000);
+})();
 
 function openModal(id) {
   var m = document.getElementById(id);
