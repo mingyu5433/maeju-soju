@@ -1647,6 +1647,7 @@ footer{
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  cursor:pointer;
   transition:opacity .55s ease;
 }
 
@@ -1660,4 +1661,25 @@ footer{
   height:100%;
   object-fit:cover;
   display:block;
+  pointer-events:none;
+}
+
+#introSkipHint{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--gold-bright);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.7;
+  animation:introHintPulse 1.8s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes introHintPulse{
+  0%,100%{ opacity:.35; }
+  50%{ opacity:.85; }
 }
