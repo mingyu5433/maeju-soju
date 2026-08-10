@@ -1634,32 +1634,3 @@ footer{
   background:linear-gradient(90deg, transparent, var(--gold), transparent);
   margin:0 0 30px;
 }
-
-/* ============================================================
-   전체화면 인트로 영상 오버레이
-   실제 헤더와는 완전히 분리된 고정 레이어. 영상 재생이 끝나면
-   자바스크립트가 opacity를 0으로 내리고 제거함.
-   ============================================================ */
-#introOverlay{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  background:#04150e;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  transition:opacity .5s ease;
-}
-
-#introOverlay.intro-hide{
-  opacity:0;
-  pointer-events:none;
-}
-
-#introOverlay video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
