@@ -8,14 +8,10 @@
 <meta name="theme-color" content="#07462f">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
-<link rel="stylesheet" href="./style.css?v=10">
+<link rel="stylesheet" href="./style.css?v=11">
 </head>
 
 <body>
-
-<div id="introOverlay" aria-hidden="true">
-  <video id="introVideo" src="./intro.mp4" autoplay muted playsinline webkit-playsinline preload="auto"></video>
-</div>
 
 <header>
   <div class="header-inner">
@@ -664,23 +660,6 @@ mingyu5433@gmail.com
   
 
 <script>
-
-function hideIntroOverlay(){
-  var overlay = document.getElementById('introOverlay');
-  if (!overlay) return;
-  overlay.classList.add('intro-hide');
-  setTimeout(function(){
-    overlay.style.display = 'none';
-  }, 550);
-}
-
-(function(){
-  var video = document.getElementById('introVideo');
-  if (!video) { hideIntroOverlay(); return; }
-  video.addEventListener('ended', hideIntroOverlay);
-  video.addEventListener('error', hideIntroOverlay);
-  setTimeout(hideIntroOverlay, 12000);
-})();
 
 function openModal(id) {
   var m = document.getElementById(id);
