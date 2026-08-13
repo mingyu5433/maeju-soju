@@ -10,10 +10,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
-<link rel="stylesheet" href="./style.css?v=12">
+<link rel="stylesheet" href="./style.css?v=13">
 </head>
 
 <body>
+<script>if(localStorage.getItem('nightMode')==='1'){document.body.classList.add('night-mode');}</script>
 
 <div id="introOverlay" aria-hidden="true" onclick="hideIntroOverlay()">
   <video id="introVideo" autoplay muted playsinline webkit-playsinline preload="auto">
@@ -577,6 +578,10 @@
     <div class="footer-links">
       <button onclick="openModal('privacyModal')">개인정보처리방침</button>
       <button onclick="openModal('mapModal')">찾아오시는 길</button>
+      <button id="nightModeToggle" onclick="toggleNightMode()">
+        <span class="night-dot"></span>
+        <span id="nightModeLabel">심야모드</span>
+      </button>
     </div>
 
     <div class="footer-social">
@@ -681,6 +686,20 @@ mingyu5433@gmail.com
   
 
 <script>
+
+function toggleNightMode(){
+  var isNight = document.body.classList.toggle('night-mode');
+  localStorage.setItem('nightMode', isNight ? '1' : '0');
+  var label = document.getElementById('nightModeLabel');
+  if (label) label.textContent = isNight ? '기본모드' : '심야모드';
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var label = document.getElementById('nightModeLabel');
+  if (label && document.body.classList.contains('night-mode')) {
+    label.textContent = '기본모드';
+  }
+});
 
 function hideIntroOverlay(){
   var overlay = document.getElementById('introOverlay');
