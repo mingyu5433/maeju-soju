@@ -33,6 +33,7 @@ body{
     var(--paper);
   color:var(--text);
   position:relative;
+  transition:background .5s ease, color .5s ease;
 }
 
 body::before{
@@ -125,6 +126,7 @@ nav{
   z-index:50;
   backdrop-filter:blur(10px) saturate(1.4);
   -webkit-backdrop-filter:blur(10px) saturate(1.4);
+  transition:background .5s ease, border-color .5s ease;
 }
 
 nav a{
@@ -153,6 +155,7 @@ nav a:hover, nav a:active{
   z-index:60;
   backdrop-filter:blur(10px) saturate(1.4);
   -webkit-backdrop-filter:blur(10px) saturate(1.4);
+  transition:background .5s ease, border-color .5s ease;
 }
 
 .chapter-nav-inner{
@@ -217,6 +220,7 @@ nav a:hover, nav a:active{
   box-shadow:var(--shadow-soft);
   position:relative;
   overflow:hidden;
+  transition:background .5s ease, border-color .5s ease;
 }
 
 .card::before{
@@ -482,4 +486,91 @@ nav a:hover, nav a:active{
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
+}
+
+/* ============================================================
+   심야모드
+   ============================================================ */
+body.night-mode{
+  --paper:#120c08;
+  --paper-dim:#1c130c;
+  --text:#f0e2c8;
+  --text-soft:#b9a381;
+  --gold:#e6a13c;
+  --gold-bright:#ffcf7f;
+  --shadow-soft:0 10px 30px rgba(0,0,0,.45);
+  --shadow-deep:0 26px 60px rgba(0,0,0,.6);
+  background:
+    radial-gradient(circle at 20% 5%, rgba(230,161,60,.10), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(230,140,60,.08), transparent 45%),
+    var(--paper);
+}
+
+body.night-mode header h1{
+  text-shadow:0 0 18px rgba(255,207,127,.5), 0 0 40px rgba(255,166,60,.22);
+}
+
+body.night-mode nav,
+body.night-mode .chapter-nav{
+  background:rgba(15,10,6,.9);
+  border-bottom-color:#3c2b18;
+}
+body.night-mode nav a{
+  background:#241a10;
+  color:var(--text);
+}
+body.night-mode nav a:hover{ color:var(--gold-bright); }
+
+body.night-mode .chapter-nav-inner a{
+  color:var(--gold-bright);
+  border-color:var(--gold);
+}
+body.night-mode .chapter-nav-inner a:hover{
+  background:var(--gold);
+  color:#1a0f04;
+}
+
+body.night-mode .card{
+  background:#1e150e;
+  border-color:#3c2b18;
+}
+
+body.night-mode .card h2,
+body.night-mode .chapter-title,
+body.night-mode .main-title,
+body.night-mode .episode-title{
+  color:var(--gold-bright);
+}
+
+body.night-mode .memoir-content{ color:var(--text); }
+
+body.night-mode .memoir-list a.memoir-list-item{
+  background:linear-gradient(160deg,#241a10,#180f08);
+  color:var(--gold-bright);
+  border-color:var(--gold);
+}
+body.night-mode .memoir-list a.memoir-list-item:hover{
+  background:var(--gold);
+  color:#1a0f04;
+}
+
+body.night-mode .back-button,
+body.night-mode .chapter-footer-nav a,
+body.night-mode .bgm-box button{
+  color:var(--gold-bright);
+  border-color:var(--gold);
+}
+body.night-mode .back-button:hover,
+body.night-mode .chapter-footer-nav a:hover,
+body.night-mode .bgm-box button:hover{
+  background:var(--gold);
+  color:#1a0f04;
+}
+
+body.night-mode .chapter-footer-nav{
+  border-top-color:#3c2b18;
+}
+
+body.night-mode #topButton{
+  box-shadow:0 10px 26px rgba(0,0,0,.5), 0 0 0 3px rgba(230,161,60,.25);
 }
