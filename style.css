@@ -49,6 +49,7 @@ body{
   color:var(--text);
   overflow-anchor:none;
   position:relative;
+  transition:background .5s ease, color .5s ease;
 }
 
 body::before{
@@ -227,7 +228,7 @@ nav{
   z-index:50;
   backdrop-filter:blur(10px) saturate(1.4);
   -webkit-backdrop-filter:blur(10px) saturate(1.4);
-  transition:box-shadow .25s ease;
+  transition:box-shadow .25s ease, background .5s ease, border-color .5s ease;
 }
 
 nav.scrolled{
@@ -335,7 +336,7 @@ nav a.active::after{
   overflow:hidden;
   opacity:0;
   transform:translateY(28px);
-  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1), background .5s ease, border-color .5s ease;
 }
 
 .card.in-view{
@@ -481,7 +482,7 @@ ul{
   padding:24px;
   overflow:hidden;
   box-sizing:border-box;
-  transition:box-shadow .25s ease, border-color .25s ease;
+  transition:box-shadow .25s ease, border-color .25s ease, background .5s ease;
 }
 
 .member-front::after{
@@ -828,6 +829,7 @@ footer{
   border-top:3px solid var(--gold);
   position:relative;
   z-index:1;
+  transition:background .5s ease;
 }
 
 .site-footer p,
@@ -844,17 +846,42 @@ footer{
   border-bottom:1px solid #b8a785;
 }
 
+.footer-links {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px 28px;
+}
+
 .footer-links button {
   background:none;
   border:none;
   color:var(--text);
-  margin-right:28px;
+  margin-right:0;
   font-weight:700;
   cursor:pointer;
 }
 
 .footer-links button:hover {
   color:var(--pine);
+}
+
+#nightModeToggle{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-family:var(--sans);
+}
+#nightModeToggle .night-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--gold);
+  transition:.4s ease;
+}
+body.night-mode #nightModeToggle .night-dot{
+  background:var(--gold-bright);
+  box-shadow:0 0 6px 2px rgba(255,207,127,.65);
 }
 
 .footer-social a {
@@ -1160,7 +1187,7 @@ footer{
   overflow:hidden;
   cursor:pointer;
   scroll-snap-align:start;
-  transition:transform .22s cubic-bezier(.3,.8,.4,1), box-shadow .22s ease, opacity .5s ease;
+  transition:transform .22s cubic-bezier(.3,.8,.4,1), box-shadow .22s ease, opacity .5s ease, background .5s ease;
   box-shadow:0 5px 14px rgba(0,0,0,0.06);
   position:relative;
   opacity:0;
@@ -1488,7 +1515,7 @@ footer{
   font-size:14.5px;
   line-height:1.7;
   color:var(--text);
-  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .5s ease;
 }
 
 .bento-rule-card:hover, .bento-talent-card:hover{
@@ -1682,4 +1709,194 @@ footer{
 @keyframes introHintPulse{
   0%,100%{ opacity:.35; }
   50%{ opacity:.85; }
+}
+
+/* ============================================================
+   심야모드 — 원목/백열등 톤의 술자리 테마
+   body.night-mode 클래스가 붙으면 아래 규칙들이 라이트 테마의
+   하드코딩된 색상들을 덮어씁니다. CSS 변수(--paper, --text 등)로
+   자연스럽게 이어지는 부분은 :root 재정의로, 그 외 개별
+   하드코딩 색상은 선택자별로 직접 덮어씁니다.
+   ============================================================ */
+body.night-mode{
+  --paper:#120c08;
+  --paper-dim:#1c130c;
+  --text:#f0e2c8;
+  --text-soft:#b9a381;
+  --gold:#e6a13c;
+  --gold-bright:#ffcf7f;
+  --shadow-soft:0 10px 30px rgba(0,0,0,.45);
+  --shadow-deep:0 26px 60px rgba(0,0,0,.6);
+  background:
+    radial-gradient(circle at 20% 5%, rgba(230,161,60,.10), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(230,140,60,.08), transparent 45%),
+    var(--paper);
+}
+
+body.night-mode header h1{
+  text-shadow:0 0 18px rgba(255,207,127,.5), 0 0 40px rgba(255,166,60,.22);
+}
+
+body.night-mode nav{
+  background:rgba(15,10,6,.88);
+  border-bottom:1px solid #3c2b18;
+}
+body.night-mode nav a{ color:var(--text); }
+body.night-mode nav a:hover, body.night-mode nav a:active{ color:var(--gold-bright); }
+body.night-mode nav a.active{ color:var(--gold-bright); }
+
+body.night-mode .utility-buttons button{
+  background:linear-gradient(160deg,#241a10,#1a130b);
+  color:var(--text);
+  border-color:var(--gold);
+}
+body.night-mode .utility-buttons button:hover{
+  background:var(--gold);
+  color:#1a0f04;
+}
+
+body.night-mode .card,
+body.night-mode .hero,
+body.night-mode .modal-content,
+body.night-mode .bento-rule-card,
+body.night-mode .bento-talent-card,
+body.night-mode .news-card,
+body.night-mode .greeting-header,
+body.night-mode .greeting-career{
+  background:#1e150e;
+  border-color:#3c2b18;
+}
+
+body.night-mode .card h2,
+body.night-mode .members-header h2{
+  color:var(--gold-bright);
+  border-bottom-color:var(--gold);
+}
+
+body.night-mode .hero img{
+  background:#241a10;
+  border-color:#3c2b18;
+}
+
+body.night-mode .members-issue-btn{
+  background:linear-gradient(160deg,#241a10,#1a130b);
+  color:var(--gold-bright);
+  border-color:var(--gold);
+}
+body.night-mode .members-issue-btn:hover{
+  background:var(--pine-deep);
+}
+
+body.night-mode .member-front{
+  background:linear-gradient(160deg,#241a10,#180f08);
+  border-color:#3c2b18;
+}
+body.night-mode .member-front h3{ color:var(--text); }
+body.night-mode .member-front strong{
+  color:var(--gold-bright);
+  background:rgba(230,161,60,.18);
+}
+
+body.night-mode .badge-face{
+  background:#241a10;
+}
+
+body.night-mode .record{
+  background:#1a130c;
+}
+body.night-mode .record h3{ color:var(--gold-bright); }
+
+body.night-mode .article-info,
+body.night-mode .caption{
+  color:var(--text-soft);
+}
+
+body.night-mode .reporter{
+  border-top-color:#3c2b18;
+  color:var(--text-soft);
+}
+
+body.night-mode footer{
+  color:var(--text-soft);
+}
+
+body.night-mode .site-footer{
+  background:linear-gradient(180deg,var(--paper-dim),#0d0803);
+}
+body.night-mode .footer-top{
+  border-bottom-color:#3c2b18;
+}
+body.night-mode .footer-links button:hover{
+  color:var(--gold-bright);
+}
+
+body.night-mode .modal{
+  background:rgba(0,0,0,.78);
+}
+
+body.night-mode .all-news-btn{
+  color:var(--gold-bright);
+}
+body.night-mode .all-news-btn:hover{
+  background:var(--gold);
+  color:#1a0f04;
+  border-color:var(--gold);
+}
+
+body.night-mode .close{ color:var(--text-soft); }
+
+body.night-mode .place-result{ color:var(--gold-bright); }
+
+body.night-mode .history-group h3,
+body.night-mode .history-details summary,
+body.night-mode .timeline-year,
+body.night-mode .news-card-body h3,
+body.night-mode .greeting-page-title,
+body.night-mode .greeting-chairman-title,
+body.night-mode .greeting-text h3{
+  color:var(--gold-bright);
+}
+body.night-mode .history-details summary{
+  border-bottom-color:var(--gold);
+}
+body.night-mode .news-card-body::after{
+  color:var(--gold-bright);
+}
+
+body.night-mode .all-news-list li{
+  border-bottom-color:#3c2b18;
+}
+body.night-mode .all-news-list li:hover{
+  background:var(--paper-dim);
+}
+
+body.night-mode .greeting-text ul,
+body.night-mode .greeting-career ul,
+body.night-mode .greeting-body p{
+  color:var(--text);
+}
+body.night-mode .greeting-photo-box img{
+  border-color:#3c2b18;
+}
+body.night-mode .greeting-photo-box p{
+  color:var(--text-soft);
+}
+
+body.night-mode .back-button,
+body.night-mode .article-nav-link{
+  color:var(--gold-bright);
+  border-color:var(--gold);
+}
+body.night-mode .back-button:hover,
+body.night-mode .article-nav-link:hover{
+  background:var(--gold);
+  color:#1a0f04;
+}
+
+body.night-mode .bento-tag{
+  border-bottom-color:#3c2b18;
+}
+
+body.night-mode #topButton{
+  box-shadow:0 10px 26px rgba(0,0,0,.5), 0 0 0 3px rgba(230,161,60,.25);
 }
