@@ -1447,16 +1447,19 @@ body.night-mode #nightModeToggle .night-dot{
 
 .bento-rule-card, .bento-talent-card{
   display:flex;
-  align-items:baseline;
+  align-items:center;
   gap:16px;
   background:transparent;
   border:none;
   border-top:1px solid #e6d8bf;
   border-radius:0;
   padding:16px 2px;
+  min-height:64px;
   font-size:14.5px;
   line-height:1.7;
   color:var(--text);
+  word-break:keep-all;
+  overflow-wrap:normal;
   transition:background .5s ease, border-color .5s ease;
 }
 
