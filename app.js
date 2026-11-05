@@ -35,12 +35,12 @@
   function renderHome(D,arts){
     var top=arts[0],h=$('#hero');
     h.href='article.html?id='+top.id;
-    h.innerHTML='<img alt="" src="'+img(top.cover)+'"><div class="cap"><span class="eyebrow">NEW · '+esc(top.tag)+'</span><b>'+esc(top.headline)+'</b></div>';
+    h.innerHTML='<img alt="" src="'+img(top.cover)+'"><div class="cap"><small>'+esc(top.tag)+' · '+esc(top.date)+'</small><b>'+esc(top.headline)+'</b></div>';
     var g=$('#grid');arts.slice(1).forEach(function(a){g.appendChild(card(a))});
     var qs=[];arts.forEach(function(a){a.body.forEach(function(t){(t.replace(/<[^>]+>/g,'').match(/[“][^”]{16,70}[”]/g)||[]).forEach(function(q){qs.push({q:q,id:a.id,t:a.headline})})})});
-    if(qs.length){var r=qs[Math.floor(Math.random()*qs.length)],qe=$('#quote');qe.href='article.html?id='+r.id;qe.hidden=false;qe.innerHTML='<span class="eyebrow">오늘의 한 줄</span><b>'+esc(r.q)+'</b><small>'+esc(r.t)+' ›</small>'}
+    if(qs.length){var r=qs[Math.floor(Math.random()*qs.length)],qe=$('#quote');qe.href='article.html?id='+r.id;qe.hidden=false;qe.innerHTML='<b>'+esc(r.q)+'</b><small>'+esc(r.t)+' ›</small>'}
     $('#count').textContent='총 '+arts.length+'건';
-    $('#issue').textContent='VOL.'+arts.length;
+    
 
     var list=function(id,arr){var box=$(id);arr.forEach(function(r){box.appendChild(el('div','it','<span class="no">'+esc(r.tag)+'</span><span class="tx">'+esc(r.text)+'</span>'))})};
     list('#rules',D.rules);list('#talent',D.talent);
@@ -51,8 +51,6 @@
 
     var days=['내일 출근이 걸리지만, 한잔은 가능합니다','월요일부터 가능하세요?','화요일, 의외로 괜찮은 날입니다','수요일, 한 주의 딱 절반입니다','목요일, 사실상 금요일입니다','내일은 없습니다','오늘은 취해도 되는 날입니다'];
     $('#today').textContent=days[new Date().getDay()];
-    var years=D.history.map(function(h){return parseInt(h.year,10)}).filter(Boolean);
-    $('#stats').innerHTML='<div><b>'+Math.min.apply(null,years)+'</b><span>비공식 창립</span></div><div><b>'+D.members.length+'</b><span>임원진</span></div><div><b>'+arts.length+'</b><span>보도자료</span></div>';
     var z=$('#zoom');
     document.querySelectorAll('.member img').forEach(function(im){im.addEventListener('click',function(){z.querySelector('img').src=im.src;z.classList.add('on')})});
     z.addEventListener('click',function(){z.classList.remove('on')});
