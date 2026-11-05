@@ -10,9 +10,17 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<script>try{if(localStorage.getItem('wdpaTheme')==='light')document.body.classList.add('light')}catch(e){}</script>
+<div id="introOverlay" aria-hidden="true" hidden>
+  <video id="introVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="./intro-pc.mp4" media="(min-width: 801px)">
+    <source src="./intro.mp4">
+  </video>
+  <div id="introSkipHint">탭하여 건너뛰기</div>
+</div>
 <header class="topbar"><div class="wrap">
   <span class="brand">매주술권장협회<i>.</i></span>
-  <span class="sub" id="issue"></span>
+  <span class="top-actions"><span class="sub" id="issue"></span><button class="chip" id="themeBtn" type="button">주간모드</button></span>
 </div></header>
 
 <main class="wrap">
@@ -20,7 +28,8 @@
   <section class="view on" id="v-articles">
     <div class="section">
       <h1 class="h-xl">오늘,<br>가능하세요?</h1>
-      <p class="muted" style="font-size:13px;margin-top:4px">협회 보도자료 · 최신순</p>
+      <p class="today" id="today"></p>
+      <p class="muted" style="font-size:13px;margin-top:6px">협회 보도자료 · 최신순</p>
       <a class="quote" id="quote" href="#" hidden></a>
       <a class="hero" id="hero" href="#"></a>
     </div>
@@ -32,19 +41,31 @@
 
   <section class="view" id="v-about">
     <div class="section">
-      <span class="eyebrow">ABOUT</span>
+      <div class="seal"><img src="협회로고.jpg" alt="협회 로고"><div><b>매주술권장협회</b>Weekly Drinking Promotion Association (WDPA)</div></div>
+      <span class="eyebrow" style="display:block;margin-top:26px">ABOUT</span>
       <h1 class="lead">건전하고 지속적인<br>음주 교류를 지향합니다.</h1>
       <p class="lead-sub">‘매주술권장협회’는 친목과 교류 중심의 민간 커뮤니티로, 정기 모임과 C-Level Inner Circle Meetup 등을 통해 회원 간 네트워크 활동을 이어가고 있는 단체입니다.</p>
     </div>
+    <div class="stats" id="stats"></div>
     <div class="section"><div class="row-head"><h2 class="h-lg">협회칙</h2></div><div class="list" id="rules"></div></div>
     <div class="section"><div class="row-head"><h2 class="h-lg">인재상</h2></div><div class="list" id="talent"></div></div>
     <div class="section"><div class="row-head"><h2 class="h-lg">협회 연혁</h2></div><div class="timeline" id="history"></div></div>
+    <div class="section"><div class="row-head"><h2 class="h-lg">더 보기</h2></div>
+      <div class="more">
+        <a href="game.html">돌림판<span>오늘 누가 쏠까</span></a>
+        <a href="memoir.html">협회장 회고록<span>›</span></a>
+        <a href="greeting.html">협회장 인사말<span>›</span></a>
+        <a href="legacy.html">이전 디자인으로 보기<span>›</span></a>
+      </div>
+    </div>
   </section>
 
   <section class="view" id="v-members">
     <div class="section">
-      <span class="eyebrow">MEMBERS</span>
-      <h1 class="h-xl" style="margin-top:4px">임원진</h1>
+      <div class="m-head"><div><span class="eyebrow">MEMBERS</span>
+      <h1 class="h-xl" style="margin-top:4px">임원진</h1></div>
+      <a class="issue" href="guest-card.html">임시회원증 발급</a></div>
+      <p class="muted" style="font-size:13px;margin-top:8px">카드를 누르면 크게 볼 수 있습니다.</p>
       <div id="members"></div>
     </div>
   </section>
@@ -55,6 +76,7 @@
   </div>
 </main>
 
+<div class="zoom" id="zoom"><img alt=""></div>
 <nav class="tabbar" aria-label="주 메뉴"><div class="in">
   <a href="#about" data-tab="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>소개</a>
   <a href="#articles" data-tab="articles"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>기사</a>

@@ -1,4 +1,18 @@
 (function(){
+  var themeBtn=document.getElementById('themeBtn');
+  function setLabel(){if(themeBtn)themeBtn.textContent=document.body.classList.contains('light')?'심야모드':'주간모드'}
+  if(themeBtn){setLabel();themeBtn.addEventListener('click',function(){var l=document.body.classList.toggle('light');try{localStorage.setItem('wdpaTheme',l?'light':'dark')}catch(e){}setLabel()})}
+  (function intro(){
+    var o=document.getElementById('introOverlay'),v=document.getElementById('introVideo');
+    if(!o||!v)return;
+    var seen=false;try{seen=sessionStorage.getItem('wdpaIntro')==='1'}catch(e){}
+    if(seen)return;
+    o.hidden=false;
+    function hide(){try{sessionStorage.setItem('wdpaIntro','1')}catch(e){}o.classList.add('intro-hide');setTimeout(function(){o.style.display='none'},550)}
+    o.addEventListener('click',hide);v.addEventListener('ended',hide);v.addEventListener('error',hide);
+    var pr=v.play();if(pr&&pr.catch)pr.catch(hide);
+    setTimeout(hide,12000);
+  })();
   var $=function(s){return document.querySelector(s)};
   var img=function(p){return encodeURI(p)};
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
@@ -34,6 +48,14 @@
     D.members.forEach(function(m){
       $('#members').appendChild(el('div','member','<img loading="lazy" alt="'+esc(m.name)+' 협회 인증카드" src="'+img(m.card)+'"><div class="nm"><b>'+esc(m.name)+'</b><span>'+esc(m.role)+'</span></div><p>'+esc(m.desc)+'</p>'));
     });
+
+    var days=['내일 출근이 걸리지만, 한잔은 가능합니다','월요일부터 가능하세요?','화요일, 의외로 괜찮은 날입니다','수요일, 한 주의 딱 절반입니다','목요일, 사실상 금요일입니다','내일은 없습니다','오늘은 취해도 되는 날입니다'];
+    $('#today').textContent=days[new Date().getDay()];
+    var years=D.history.map(function(h){return parseInt(h.year,10)}).filter(Boolean);
+    $('#stats').innerHTML='<div><b>'+Math.min.apply(null,years)+'</b><span>비공식 창립</span></div><div><b>'+D.members.length+'</b><span>임원진</span></div><div><b>'+arts.length+'</b><span>보도자료</span></div>';
+    var z=$('#zoom');
+    document.querySelectorAll('.member img').forEach(function(im){im.addEventListener('click',function(){z.querySelector('img').src=im.src;z.classList.add('on')})});
+    z.addEventListener('click',function(){z.classList.remove('on')});
 
     function tab(){
       var t=(location.hash||'#articles').slice(1);
