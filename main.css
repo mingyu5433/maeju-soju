@@ -98,3 +98,10 @@ img{display:block;max-width:100%}
 .tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;color:var(--muted)}
 .tabbar a svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tabbar a.on{color:var(--accent)}
+
+/* quote */
+.quote{display:block;margin-top:18px;padding:16px;border-radius:14px;background:var(--surface)}
+.quote[hidden]{display:none}
+.quote b{display:block;margin-top:6px;font-size:18px;line-height:1.5;font-weight:800;letter-spacing:-.03em}
+.quote small{display:block;margin-top:8px;font-size:12px;color:var(--muted)}
+.quote+.hero{margin-top:12px}

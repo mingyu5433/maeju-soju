@@ -1,6 +1,6 @@
 (function(){
   var $=function(s){return document.querySelector(s)};
-  var img=function(p){return '../'+encodeURI(p)};
+  var img=function(p){return encodeURI(p)};
   function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
   function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
@@ -23,6 +23,8 @@
     h.href='article.html?id='+top.id;
     h.innerHTML='<img alt="" src="'+img(top.cover)+'"><div class="cap"><span class="eyebrow">NEW · '+esc(top.tag)+'</span><b>'+esc(top.headline)+'</b></div>';
     var g=$('#grid');arts.slice(1).forEach(function(a){g.appendChild(card(a))});
+    var qs=[];arts.forEach(function(a){a.body.forEach(function(t){(t.replace(/<[^>]+>/g,'').match(/[“][^”]{16,70}[”]/g)||[]).forEach(function(q){qs.push({q:q,id:a.id,t:a.headline})})})});
+    if(qs.length){var r=qs[Math.floor(Math.random()*qs.length)],qe=$('#quote');qe.href='article.html?id='+r.id;qe.hidden=false;qe.innerHTML='<span class="eyebrow">오늘의 한 줄</span><b>'+esc(r.q)+'</b><small>'+esc(r.t)+' ›</small>'}
     $('#count').textContent='총 '+arts.length+'건';
     $('#issue').textContent='VOL.'+arts.length;
 
